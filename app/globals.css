@@ -35,9 +35,11 @@
   margin: 0;
 }
 
-/* Base HTML settings - will be dynamically updated by language context */
+/* Smooth scrolling optimization */
 html {
   direction: rtl; /* Default to Arabic RTL */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
 }
 
 /* Language-specific font families */
@@ -51,7 +53,8 @@ html[lang="en"], html[lang="fr"] {
 
 body {
   line-height: 1.6;
-  transition: all 0.3s ease;
+  transition: font-family 0.3s ease; /* Only animate font changes */
+  overflow-x: hidden; /* Prevent horizontal scroll glitches */
 }
 
 /* Arabic (default) */
@@ -88,7 +91,7 @@ html[lang="fr"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
   color: white !important;
 }
 
-/* WhatsApp floating button */
+/* WhatsApp floating button - Optimized for smooth scrolling */
 .whatsapp-float {
   position: fixed;
   width: 60px;
@@ -105,7 +108,9 @@ html[lang="fr"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease; /* Reduced transition time */
+  will-change: transform; /* Optimize for transforms */
+  backface-visibility: hidden; /* Reduce repaints */
 }
 
 /* Position based on language direction */
@@ -120,7 +125,7 @@ html[lang="fr"] .whatsapp-float {
 
 .whatsapp-float:hover {
   background-color: #128c7e;
-  transform: scale(1.1);
+  transform: scale(1.05); /* Reduced scale to prevent layout shifts */
 }
 
 .whatsapp-float svg,
@@ -136,48 +141,51 @@ button[class*="bg-green"] svg path {
   color: white !important;
 }
 
-/* Mobile Landing Page Animations */
+/* Mobile Landing Page Animations - Optimized for performance */
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
+  animation: fadeInUp 0.6s ease-out forwards; /* Reduced duration */
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px); /* Reduced distance */
+  will-change: transform, opacity;
 }
 
 .animate-slide-in-right {
-  animation: slideInRight 0.6s ease-out forwards;
+  animation: slideInRight 0.5s ease-out forwards; /* Reduced duration */
   opacity: 0;
-  transform: translateX(50px);
+  transform: translateX(30px); /* Reduced distance */
+  will-change: transform, opacity;
 }
 
 /* LTR languages slide from left */
 html[lang="en"] .animate-slide-in-right,
 html[lang="fr"] .animate-slide-in-right {
-  animation: slideInLeft 0.6s ease-out forwards;
-  transform: translateX(-50px);
+  animation: slideInLeft 0.5s ease-out forwards; /* Reduced duration */
+  transform: translateX(-30px); /* Reduced distance */
 }
 
 .animate-bounce-gentle {
-  animation: bounceGentle 2s ease-in-out infinite;
+  animation: bounceGentle 3s ease-in-out infinite; /* Slower for less interference */
 }
 
 .animate-pulse-gentle {
-  animation: pulseGentle 2s ease-in-out infinite;
+  animation: pulseGentle 3s ease-in-out infinite; /* Slower for less interference */
 }
 
 .animate-count-up {
-  animation: countUp 1.5s ease-out forwards;
+  animation: countUp 1s ease-out forwards; /* Reduced duration */
+  will-change: transform, opacity;
 }
 
-/* Animation Delays */
-.animation-delay-200 { animation-delay: 0.2s; }
-.animation-delay-400 { animation-delay: 0.4s; }
-.animation-delay-600 { animation-delay: 0.6s; }
-.animation-delay-800 { animation-delay: 0.8s; }
-.animation-delay-1000 { animation-delay: 1.0s; }
-.animation-delay-1200 { animation-delay: 1.2s; }
-.animation-delay-1400 { animation-delay: 1.4s; }
+/* Animation Delays - Reduced for faster loading */
+.animation-delay-200 { animation-delay: 0.1s; }
+.animation-delay-400 { animation-delay: 0.2s; }
+.animation-delay-600 { animation-delay: 0.3s; }
+.animation-delay-800 { animation-delay: 0.4s; }
+.animation-delay-1000 { animation-delay: 0.5s; }
+.animation-delay-1200 { animation-delay: 0.6s; }
+.animation-delay-1400 { animation-delay: 0.7s; }
 
-/* Keyframe Animations */
+/* Optimized Keyframe Animations */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -201,30 +209,49 @@ html[lang="fr"] .animate-slide-in-right {
 
 @keyframes bounceGentle {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+  50% { transform: translateY(-3px); } /* Reduced bounce distance */
 }
 
 @keyframes pulseGentle {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  50% { opacity: 0.8; } /* Less dramatic pulse */
 }
 
 @keyframes countUp {
-  from { transform: scale(0.5); opacity: 0; }
+  from { transform: scale(0.8); opacity: 0; } /* Less dramatic scale */
   to { transform: scale(1); opacity: 1; }
 }
 
 .animate-float {
-  animation: float 6s ease-in-out infinite;
+  animation: float 8s ease-in-out infinite; /* Slower for less interference */
 }
 
 .animate-pulse-slow {
-  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; /* Even slower */
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
+  50% { transform: translateY(-10px); } /* Reduced float distance */
+}
+
+/* Scroll performance optimizations */
+.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .whatsapp-float {
+    transition: none;
+  }
 }
 
 @media (max-width: 768px) {
@@ -240,6 +267,13 @@ html[lang="fr"] .animate-slide-in-right {
   html[lang="en"] .whatsapp-float,
   html[lang="fr"] .whatsapp-float {
     right: 20px;
+  }
+  
+  /* Disable some animations on mobile for better performance */
+  .animate-bounce-gentle,
+  .animate-pulse-gentle,
+  .animate-float {
+    animation: none;
   }
 }
 

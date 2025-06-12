@@ -31,9 +31,10 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
   const [showInstructions, setShowInstructions] = useState(true)
   const [hasInteracted, setHasInteracted] = useState(false)
   
-  // Touch tracking for better mobile interaction
-  const [touchStart, setTouchStart] = useState<{ x: number, y: number } | null>(null)
+  // Touch tracking for better mobile interaction - improved logic
+  const [touchStart, setTouchStart] = useState<{ x: number, y: number, time: number } | null>(null)
   const [isHorizontalDrag, setIsHorizontalDrag] = useState(false)
+  const [touchMoved, setTouchMoved] = useState(false)
   
   const containerRef = useRef<HTMLDivElement>(null)
 
@@ -92,28 +93,21 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
   const instructionText = getInstructionText()
 
   const updateSliderPosition = useCallback((clientX: number) => {
-    console.log('updateSliderPosition called with clientX:', clientX)
-    if (!containerRef.current) {
-      console.log('No container ref')
-      return
-    }
+    if (!containerRef.current) return
 
     const rect = containerRef.current.getBoundingClientRect()
     const x = clientX - rect.left
     const percent = Math.max(0, Math.min(100, (x / rect.width) * 100))
-    console.log('Setting slider position to:', percent)
     setSliderPosition(percent)
     
     // Hide instructions after first interaction
     if (showInstructions && !hasInteracted) {
-      console.log('Hiding instructions')
       setShowInstructions(false)
       setHasInteracted(true)
     }
   }, [showInstructions, hasInteracted])
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    console.log('Mouse down triggered')
     e.preventDefault()
     setIsDragging(true)
     updateSliderPosition(e.clientX)
@@ -121,24 +115,26 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
     if (isDragging) {
-      console.log('Mouse move while dragging')
       updateSliderPosition(e.clientX)
     }
   }, [isDragging, updateSliderPosition])
 
   const handleMouseUp = useCallback(() => {
-    console.log('Mouse up triggered')
     setIsDragging(false)
   }, [])
 
+  // Improved touch handling that doesn't interfere with page scrolling
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    console.log('Touch start triggered')
     const touch = e.touches[0]
-    setTouchStart({ x: touch.clientX, y: touch.clientY })
+    setTouchStart({ 
+      x: touch.clientX, 
+      y: touch.clientY, 
+      time: Date.now() 
+    })
     setIsHorizontalDrag(false)
+    setTouchMoved(false)
     
-    // Don't prevent default immediately - let's see the movement direction first
-    // Only set dragging when we confirm horizontal movement
+    // Don't prevent default here - let the browser handle scrolling initially
   }, [])
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
@@ -147,44 +143,54 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     const touch = e.touches[0]
     const deltaX = Math.abs(touch.clientX - touchStart.x)
     const deltaY = Math.abs(touch.clientY - touchStart.y)
+    const totalMovement = deltaX + deltaY
     
-    // Determine if this is a horizontal or vertical gesture
-    if (!isDragging && !isHorizontalDrag) {
-      // Only start dragging if horizontal movement is dominant
-      if (deltaX > deltaY && deltaX > 10) {
-        console.log('Horizontal drag detected, starting slider interaction')
+    // Only consider this a real gesture if there's significant movement
+    if (totalMovement < 5) return
+    
+    setTouchMoved(true)
+    
+    // More strict horizontal detection - only interfere with scroll if it's clearly horizontal
+    if (!isDragging && !isHorizontalDrag && totalMovement > 15) {
+      const isHorizontal = deltaX > deltaY && deltaX > 20
+      const horizontalRatio = deltaX / (deltaY || 1)
+      
+      if (isHorizontal && horizontalRatio > 2) {
+        // This is clearly a horizontal drag on the slider
         setIsDragging(true)
         setIsHorizontalDrag(true)
-        e.preventDefault() // Now prevent default since we confirmed horizontal drag
+        e.preventDefault() // Only now prevent default
         updateSliderPosition(touch.clientX)
-      } else if (deltaY > deltaX && deltaY > 10) {
-        console.log('Vertical scroll detected, ignoring touch for slider')
-        // This is a vertical scroll, don't interfere
+      } else if (deltaY > deltaX && deltaY > 20) {
+        // This is clearly vertical scrolling - don't interfere
         setTouchStart(null)
         return
       }
     } else if (isDragging && isHorizontalDrag) {
-      console.log('Touch move while dragging horizontally')
-      e.preventDefault() // Prevent scrolling during horizontal drag
+      // Continue horizontal dragging
+      e.preventDefault()
       updateSliderPosition(touch.clientX)
     }
   }, [isDragging, isHorizontalDrag, touchStart, updateSliderPosition])
 
   const handleTouchEnd = useCallback(() => {
-    console.log('Touch end triggered')
     setIsDragging(false)
     setIsHorizontalDrag(false)
     setTouchStart(null)
+    setTouchMoved(false)
   }, [])
 
-  // Add global event listeners for mouse and touch move/end events
+  // Improved event listener management
   useEffect(() => {
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
-      // Use passive: false to allow preventDefault when needed
-      document.addEventListener('touchmove', handleTouchMove, { passive: false })
-      document.addEventListener('touchend', handleTouchEnd)
+      
+      // Only add touch listeners if we're actually dragging
+      if (isHorizontalDrag) {
+        document.addEventListener('touchmove', handleTouchMove, { passive: false })
+      }
+      document.addEventListener('touchend', handleTouchEnd, { passive: true })
     }
 
     return () => {
@@ -193,21 +199,17 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
       document.removeEventListener('touchmove', handleTouchMove)
       document.removeEventListener('touchend', handleTouchEnd)
     }
-  }, [isDragging, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchEnd])
+  }, [isDragging, isHorizontalDrag, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchEnd])
 
   const nextComparison = () => {
-    console.log('Next comparison clicked')
     setCurrentIndex(prev => (prev + 1) % comparisons.length)
     setSliderPosition(30)
   }
 
   const prevComparison = () => {
-    console.log('Previous comparison clicked')
     setCurrentIndex(prev => (prev - 1 + comparisons.length) % comparisons.length)
     setSliderPosition(30)
   }
-
-  console.log('Component render - current comparison:', currentComparison?.location, 'slider position:', sliderPosition)
 
   return (
     <div className={`relative ${className}`}>
@@ -217,15 +219,9 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
         className="relative overflow-hidden rounded-2xl bg-gray-200 shadow-2xl group cursor-pointer select-none"
         style={{ 
           aspectRatio: '16/10',
-          touchAction: 'pan-y pinch-zoom'
+          touchAction: 'pan-y pinch-zoom' // Allow vertical scrolling and pinch zoom
         }}
         onTouchStart={handleTouchStart}
-        onTouchMove={(e: React.TouchEvent) => {
-          // Convert React touch event to regular event for consistency
-          const touchEvent = e.nativeEvent as TouchEvent
-          handleTouchMove(touchEvent)
-        }}
-        onTouchEnd={handleTouchEnd}
       >
         {/* After Image (Background) */}
         <div className="absolute inset-0">
@@ -287,7 +283,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           {/* Interactive Slider Handle */}
           <div 
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-2xl cursor-col-resize flex items-center justify-center hover:scale-110 transition-all duration-300 z-30 pointer-events-auto ${isDragging ? 'scale-125 shadow-blue-500/50' : ''}`}
-            style={{ touchAction: 'pan-y pinch-zoom' }}
+            style={{ touchAction: 'none' }} // Disable touch action on the handle itself
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
           >
@@ -298,14 +294,14 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           </div>
 
           {/* Vertical indicators */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg"></div>
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg"></div>
+          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg pointer-events-none"></div>
+          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg pointer-events-none"></div>
         </div>
 
-        {/* Interactive overlay - This captures all clicks/drags */}
+        {/* Interactive overlay - This captures all clicks/drags but with better touch handling */}
         <div 
           className="absolute inset-0 cursor-col-resize z-10"
-          style={{ touchAction: 'pan-y pinch-zoom' }}
+          style={{ touchAction: 'pan-y pinch-zoom' }} // Allow vertical scrolling
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         />
@@ -350,7 +346,6 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
             <button
               key={index}
               onClick={() => {
-                console.log('Indicator clicked:', index)
                 setCurrentIndex(index)
                 setSliderPosition(30)
               }}

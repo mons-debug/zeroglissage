@@ -140,7 +140,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
       {/* Floating WhatsApp Button */}
       <FloatingWhatsApp />
 
