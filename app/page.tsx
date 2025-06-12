@@ -152,7 +152,7 @@ export default function LandingPage() {
             {/* Zero Glissage Logo - Main Title Replacement */}
             <div className="animate-float mb-6 animate-fade-in-up">
               <img 
-                src="/gliisagelogo-01.png" 
+                src="/images/gliisagelogo-02.png" 
                 alt="Zero Glissage Logo" 
                 className="h-24 md:h-32 lg:h-40 xl:h-48 mx-auto mb-4 drop-shadow-2xl filter brightness-110"
               />
