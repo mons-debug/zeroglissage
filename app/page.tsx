@@ -150,11 +150,12 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-6xl mx-auto">
             {/* Zero Glissage Logo - Main Title Replacement */}
-            <div className="animate-float mb-8 animate-fade-in-up">
+            <div className="relative z-20 mb-12 animate-fade-in-up">
               <img 
-                src="/gliisagelogo-02.png" 
+                src="/images/gliisagelogo-02.png" 
                 alt="Zero Glissage Logo" 
-                className="h-32 md:h-40 lg:h-48 xl:h-56 mx-auto mb-6 drop-shadow-2xl filter brightness-110"
+                className="h-40 md:h-48 lg:h-56 xl:h-64 mx-auto drop-shadow-2xl"
+                style={{ objectFit: 'contain' }}
               />
             </div>
             
@@ -207,11 +208,11 @@ export default function LandingPage() {
           
           {/* Mobile Layout - Full Width Image with Overlay (unchanged) */}
           <div className="lg:hidden relative max-w-6xl mx-auto">
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl min-h-[85vh]">
               <img 
                 src="/images/1.PNG" 
                 alt="خطر الانزلاق على الأرضيات المبللة" 
-                className="w-full h-auto min-h-[500px] md:min-h-[600px] object-cover"
+                className="w-full h-full object-cover absolute inset-0"
               />
               
               {/* Image overlay for better contrast */}
@@ -219,46 +220,42 @@ export default function LandingPage() {
               
               {/* Mobile: Centered Glass Overlay */}
               <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
-                <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/10 relative overflow-hidden max-w-4xl w-full">
+                <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/10 relative overflow-hidden max-w-4xl w-full my-auto mt-[15vh]">
                   {/* Subtle background pattern */}
                   <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-red-500/5 rounded-3xl"></div>
                   
                   {/* Content */}
                   <div className="relative z-10 text-center">
-                    <div className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 bg-red-500/90 backdrop-blur-sm rounded-full mb-6 shadow-xl">
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-red-500/90 backdrop-blur-sm rounded-full mb-4 shadow-xl">
                       <img 
                         src="/gliisagelogo-06.png" 
                         alt="خطر الانزلاق" 
-                        className="w-12 h-12 md:w-16 md:h-16"
+                        className="w-10 h-10 md:w-12 md:h-12"
                       />
                     </div>
                     
-                    <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-6 leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
+                    <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 leading-tight drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] [text-shadow:_2px_2px_4px_rgb(0_0_0_/_80%)]">
                       خطر الانزلاق يهدد سلامة عائلتك!
                     </h2>
                     
-                    <div className="max-w-3xl mx-auto space-y-6">
-                      <p className="text-lg md:text-xl text-white leading-relaxed font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_2px_rgb(0_0_0_/_70%)]">
+                    <div className="max-w-3xl mx-auto space-y-4">
+                      <p className="text-base md:text-lg text-white leading-relaxed font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] [text-shadow:_1px_1px_2px_rgb(0_0_0_/_70%)]">
                         كل سنة، آلاف الأشخاص يتعرضون لحوادث خطيرة بسبب الانزلاق في المنازل.
                       </p>
-                      <div className="bg-red-600/95 backdrop-blur-sm rounded-2xl px-6 py-4 inline-block shadow-xl border border-red-400/70">
-                        <p className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">
+                      <div className="bg-red-600/95 backdrop-blur-sm rounded-2xl px-4 py-3 inline-block shadow-xl border border-red-400/70">
+                        <p className="text-lg md:text-xl font-bold text-white drop-shadow-lg">
                           لا تنتظر حتى يحدث الحادث!
                         </p>
                       </div>
                     </div>
                   </div>
-                  
-                  {/* Glass effect decorative elements */}
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-white/10 to-transparent rounded-full blur-xl"></div>
-                  <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-tr from-red-200/20 to-transparent rounded-full blur-lg"></div>
                 </div>
               </div>
               
               {/* Bottom Caption */}
-              <div className="absolute bottom-6 left-6 right-6">
+              <div className="absolute bottom-8 left-6 right-6">
                 <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
-                  <h3 className="text-lg md:text-xl font-bold text-white mb-1 drop-shadow-lg">
+                  <h3 className="text-base md:text-lg font-bold text-white mb-1 drop-shadow-lg">
                     هذا ما يحدث كل يوم في البيوت المغربية
                   </h3>
                   <p className="text-sm md:text-base text-white/90 drop-shadow-lg">
