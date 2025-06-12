@@ -155,11 +155,6 @@ export default function LandingPage() {
                 src="/gliisagelogo-02.png" 
                 alt="Zero Glissage Logo" 
                 className="h-32 md:h-40 lg:h-48 xl:h-56 mx-auto mb-6 drop-shadow-2xl filter brightness-110"
-                onError={(e) => {
-                  console.log('Logo failed to load');
-                  e.currentTarget.style.display = 'none';
-                }}
-                onLoad={() => console.log('Logo loaded successfully')}
               />
             </div>
             
