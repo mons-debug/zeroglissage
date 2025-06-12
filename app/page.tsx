@@ -136,7 +136,7 @@ export default function LandingPage() {
       <FloatingWhatsApp />
 
       {/* Hero Section */}
-      <section className="relative text-white py-8 md:py-12 lg:py-16 overflow-hidden hero-bg lg:hero-bg-desktop">
+      <section className="relative text-white py-20 lg:py-32 overflow-hidden hero-bg lg:hero-bg-desktop">
         {/* Desktop Background Image */}
         <div 
           className="absolute inset-0 hidden lg:block bg-cover bg-center bg-no-repeat"
@@ -150,51 +150,56 @@ export default function LandingPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-6xl mx-auto">
             {/* Zero Glissage Logo - Main Title Replacement */}
-            <div className="animate-float mb-6 animate-fade-in-up">
+            <div className="animate-float mb-8 animate-fade-in-up">
               <img 
                 src="/images/gliisagelogo-02.png" 
                 alt="Zero Glissage Logo" 
-                className="h-24 md:h-32 lg:h-40 xl:h-48 mx-auto mb-4 drop-shadow-2xl filter brightness-110"
+                className="h-32 md:h-40 lg:h-48 xl:h-56 mx-auto mb-6 drop-shadow-2xl filter brightness-110"
+                onError={(e) => {
+                  console.log('Logo failed to load');
+                  e.currentTarget.style.display = 'none';
+                }}
+                onLoad={() => console.log('Logo loaded successfully')}
               />
             </div>
             
-            <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-4 lg:mb-6 leading-tight text-white animate-fade-in-up animation-delay-200">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight text-white animate-fade-in-up animation-delay-200">
               حل مضاد للانزلاق
             </h1>
             
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl mb-6 lg:mb-8 text-blue-100 font-medium max-w-4xl mx-auto animate-fade-in-up animation-delay-400">
+            <p className="text-xl md:text-2xl lg:text-2xl xl:text-3xl mb-8 text-blue-100 font-medium max-w-4xl mx-auto animate-fade-in-up animation-delay-400">
               تقنية مبتكرة لحماية عائلتك من مخاطر الانزلاق
               <br />
               <span className="text-yellow-300">بدون تكسير • شفاف • آمن 100%</span>
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8 lg:mb-12 max-w-4xl mx-auto animate-fade-in-up animation-delay-600">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12 max-w-4xl mx-auto animate-fade-in-up animation-delay-600">
               <WhatsAppButton 
                 text="احصل على استشارة مجانية الآن" 
-                className="text-base lg:text-lg px-8 py-4 w-full sm:w-auto mx-auto animate-bounce-gentle"
+                className="text-lg lg:text-xl px-10 py-5 w-full sm:w-auto mx-auto animate-bounce-gentle"
               />
-              <div className="flex items-center text-green-300 font-semibold text-sm lg:text-base animate-pulse-gentle">
-                <CheckCircle className="w-4 h-4 lg:w-5 lg:h-5 ml-2" />
+              <div className="flex items-center text-green-300 font-semibold text-base lg:text-lg animate-pulse-gentle">
+                <CheckCircle className="w-5 h-5 ml-2" />
                 فحص وتجربة مجانية في منزلك
               </div>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-6 text-center text-sm max-w-4xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 lg:p-6 animate-fade-in-up animation-delay-800">
-                <div className="text-xl lg:text-3xl font-bold text-yellow-400 animate-count-up">+500</div>
-                <div className="text-xs lg:text-base">منزل محمي</div>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 text-center text-sm max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-800">
+                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">+500</div>
+                <div className="text-sm lg:text-base">منزل محمي</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 lg:p-6 animate-fade-in-up animation-delay-1000">
-                <div className="text-xl lg:text-3xl font-bold text-green-400 animate-count-up">100%</div>
-                <div className="text-xs lg:text-base">ضمان الجودة</div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1000">
+                <div className="text-2xl lg:text-3xl font-bold text-green-400 animate-count-up">100%</div>
+                <div className="text-sm lg:text-base">ضمان الجودة</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 lg:p-6 animate-fade-in-up animation-delay-1200">
-                <div className="text-xl lg:text-3xl font-bold text-blue-300 animate-count-up">24h</div>
-                <div className="text-xs lg:text-base">خدمة سريعة</div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1200">
+                <div className="text-2xl lg:text-3xl font-bold text-blue-300 animate-count-up">24h</div>
+                <div className="text-sm lg:text-base">خدمة سريعة</div>
               </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 lg:p-6 animate-fade-in-up animation-delay-1400">
-                <div className="text-xl lg:text-3xl font-bold text-purple-300 animate-count-up">5★</div>
-                <div className="text-xs lg:text-base">تقييم العملاء</div>
+              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1400">
+                <div className="text-2xl lg:text-3xl font-bold text-purple-300 animate-count-up">5★</div>
+                <div className="text-sm lg:text-base">تقييم العملاء</div>
               </div>
             </div>
           </div>
