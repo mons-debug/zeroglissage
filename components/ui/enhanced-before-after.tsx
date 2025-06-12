@@ -16,12 +16,14 @@ interface EnhancedBeforeAfterProps {
   comparisons: ComparisonData[]
   className?: string
   showControls?: boolean
+  language?: 'ar' | 'en' | 'fr'
 }
 
 export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
   comparisons,
   className = "",
-  showControls = true
+  showControls = true,
+  language = 'ar'
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [sliderPosition, setSliderPosition] = useState(30)
@@ -29,9 +31,65 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
   const [showInstructions, setShowInstructions] = useState(true)
   const [hasInteracted, setHasInteracted] = useState(false)
   
+  // Touch tracking for better mobile interaction
+  const [touchStart, setTouchStart] = useState<{ x: number, y: number } | null>(null)
+  const [isHorizontalDrag, setIsHorizontalDrag] = useState(false)
+  
   const containerRef = useRef<HTMLDivElement>(null)
 
   const currentComparison = comparisons[currentIndex]
+
+  // Translation helper
+  const getInstructionText = () => {
+    switch (language) {
+      case 'ar':
+        return {
+          desktop: {
+            title: 'اسحب للمقارنة',
+            subtitle: 'انقر واسحب الخط الأبيض لترى الفرق المذهل'
+          },
+          mobile: {
+            title: 'اسحب بإصبعك',
+            subtitle: 'اسحب الخط الأبيض لترى النتيجة'
+          }
+        }
+      case 'en':
+        return {
+          desktop: {
+            title: 'Drag to Compare',
+            subtitle: 'Click and drag the white line to see the amazing difference'
+          },
+          mobile: {
+            title: 'Drag with Your Finger',
+            subtitle: 'Drag the white line to see the result'
+          }
+        }
+      case 'fr':
+        return {
+          desktop: {
+            title: 'Glissez pour Comparer',
+            subtitle: 'Cliquez et glissez la ligne blanche pour voir la différence incroyable'
+          },
+          mobile: {
+            title: 'Glissez avec Votre Doigt',
+            subtitle: 'Glissez la ligne blanche pour voir le résultat'
+          }
+        }
+      default:
+        return {
+          desktop: {
+            title: 'اسحب للمقارنة',
+            subtitle: 'انقر واسحب الخط الأبيض لترى الفرق المذهل'
+          },
+          mobile: {
+            title: 'اسحب بإصبعك',
+            subtitle: 'اسحب الخط الأبيض لترى النتيجة'
+          }
+        }
+    }
+  }
+
+  const instructionText = getInstructionText()
 
   const updateSliderPosition = useCallback((clientX: number) => {
     console.log('updateSliderPosition called with clientX:', clientX)
@@ -75,22 +133,48 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     console.log('Touch start triggered')
-    e.preventDefault()
-    setIsDragging(true)
-    updateSliderPosition(e.touches[0].clientX)
-  }, [updateSliderPosition])
+    const touch = e.touches[0]
+    setTouchStart({ x: touch.clientX, y: touch.clientY })
+    setIsHorizontalDrag(false)
+    
+    // Don't prevent default immediately - let's see the movement direction first
+    // Only set dragging when we confirm horizontal movement
+  }, [])
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (isDragging) {
-      console.log('Touch move while dragging')
-      e.preventDefault()
-      updateSliderPosition(e.touches[0].clientX)
+    if (!touchStart) return
+
+    const touch = e.touches[0]
+    const deltaX = Math.abs(touch.clientX - touchStart.x)
+    const deltaY = Math.abs(touch.clientY - touchStart.y)
+    
+    // Determine if this is a horizontal or vertical gesture
+    if (!isDragging && !isHorizontalDrag) {
+      // Only start dragging if horizontal movement is dominant
+      if (deltaX > deltaY && deltaX > 10) {
+        console.log('Horizontal drag detected, starting slider interaction')
+        setIsDragging(true)
+        setIsHorizontalDrag(true)
+        e.preventDefault() // Now prevent default since we confirmed horizontal drag
+        updateSliderPosition(touch.clientX)
+      } else if (deltaY > deltaX && deltaY > 10) {
+        console.log('Vertical scroll detected, ignoring touch for slider')
+        // This is a vertical scroll, don't interfere
+        setTouchStart(null)
+        return
+      }
+    } else if (isDragging && isHorizontalDrag) {
+      console.log('Touch move while dragging horizontally')
+      e.preventDefault() // Prevent scrolling during horizontal drag
+      updateSliderPosition(touch.clientX)
     }
-  }, [isDragging, updateSliderPosition])
+  }, [isDragging, isHorizontalDrag, touchStart, updateSliderPosition])
 
   const handleTouchEnd = useCallback(() => {
     console.log('Touch end triggered')
     setIsDragging(false)
+    setIsHorizontalDrag(false)
+    setTouchStart(null)
   }, [])
 
   // Add global event listeners for mouse and touch move/end events
@@ -98,7 +182,8 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     if (isDragging) {
       document.addEventListener('mousemove', handleMouseMove)
       document.addEventListener('mouseup', handleMouseUp)
-      document.addEventListener('touchmove', handleTouchMove)
+      // Use passive: false to allow preventDefault when needed
+      document.addEventListener('touchmove', handleTouchMove, { passive: false })
       document.addEventListener('touchend', handleTouchEnd)
     }
 
@@ -130,7 +215,17 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
       <div 
         ref={containerRef}
         className="relative overflow-hidden rounded-2xl bg-gray-200 shadow-2xl group cursor-pointer select-none"
-        style={{ aspectRatio: '16/10' }}
+        style={{ 
+          aspectRatio: '16/10',
+          touchAction: 'pan-y pinch-zoom'
+        }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={(e: React.TouchEvent) => {
+          // Convert React touch event to regular event for consistency
+          const touchEvent = e.nativeEvent as TouchEvent
+          handleTouchMove(touchEvent)
+        }}
+        onTouchEnd={handleTouchEnd}
       >
         {/* After Image (Background) */}
         <div className="absolute inset-0">
@@ -172,13 +267,13 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
             <div className="text-center text-white p-6 bg-black/70 rounded-2xl backdrop-blur-sm max-w-md mx-4">
               <div className="hidden md:block">
                 <MousePointer className="w-12 h-12 mx-auto mb-4 text-yellow-400" />
-                <p className="text-lg font-semibold mb-2">اسحب للمقارنة</p>
-                <p className="text-sm opacity-90">انقر واسحب الخط الأبيض لترى الفرق المذهل</p>
+                <p className="text-lg font-semibold mb-2">{instructionText.desktop.title}</p>
+                <p className="text-sm opacity-90">{instructionText.desktop.subtitle}</p>
               </div>
               <div className="md:hidden">
                 <Smartphone className="w-12 h-12 mx-auto mb-4 text-yellow-400" />
-                <p className="text-lg font-semibold mb-2">اسحب بإصبعك</p>
-                <p className="text-sm opacity-90">اسحب الخط الأبيض لترى النتيجة</p>
+                <p className="text-lg font-semibold mb-2">{instructionText.mobile.title}</p>
+                <p className="text-sm opacity-90">{instructionText.mobile.subtitle}</p>
               </div>
             </div>
           </div>
@@ -192,6 +287,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           {/* Interactive Slider Handle */}
           <div 
             className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-2xl cursor-col-resize flex items-center justify-center hover:scale-110 transition-all duration-300 z-30 pointer-events-auto ${isDragging ? 'scale-125 shadow-blue-500/50' : ''}`}
+            style={{ touchAction: 'pan-y pinch-zoom' }}
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
           >
@@ -209,6 +305,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
         {/* Interactive overlay - This captures all clicks/drags */}
         <div 
           className="absolute inset-0 cursor-col-resize z-10"
+          style={{ touchAction: 'pan-y pinch-zoom' }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         />

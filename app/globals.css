@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,6 +14,19 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;  /* Safari and Chrome */
   }
+  
+  /* Better touch handling for sliders */
+  .touch-pan-y {
+    touch-action: pan-y pinch-zoom;
+  }
+  
+  .touch-none {
+    touch-action: none;
+  }
+  
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
 }
 
 * {
@@ -20,22 +35,65 @@
   margin: 0;
 }
 
+/* Base HTML settings - will be dynamically updated by language context */
 html {
+  direction: rtl; /* Default to Arabic RTL */
+}
+
+/* Language-specific font families */
+html[lang="ar"] {
   direction: rtl;
+}
+
+html[lang="en"], html[lang="fr"] {
+  direction: ltr;
 }
 
 body {
-  font-family: 'Tajawal', 'Cairo', system-ui, sans-serif;
   line-height: 1.6;
+  transition: all 0.3s ease;
+}
+
+/* Arabic (default) */
+html[lang="ar"] body {
+  font-family: 'Tajawal', 'Cairo', system-ui, sans-serif;
   direction: rtl;
 }
 
+/* English */
+html[lang="en"] body {
+  font-family: 'Inter', 'Poppins', system-ui, sans-serif;
+  direction: ltr;
+}
+
+/* French */
+html[lang="fr"] body {
+  font-family: 'Poppins', 'Inter', system-ui, sans-serif;
+  direction: ltr;
+}
+
+/* Language-specific spacing adjustments */
+html[lang="en"] .space-x-reverse > :not([hidden]) ~ :not([hidden]),
+html[lang="fr"] .space-x-reverse > :not([hidden]) ~ :not([hidden]) {
+  --tw-space-x-reverse: 0;
+  margin-right: 0;
+  margin-left: calc(var(--tw-space-x) * 1);
+}
+
+/* WhatsApp Icon Styling - Force white color */
+.whatsapp-icon,
+.whatsapp-icon svg,
+.whatsapp-icon svg path {
+  fill: white !important;
+  color: white !important;
+}
+
+/* WhatsApp floating button */
 .whatsapp-float {
   position: fixed;
   width: 60px;
   height: 60px;
   bottom: 40px;
-  right: 40px;
   background-color: #25d366;
   color: #FFF;
   border-radius: 50px;
@@ -50,9 +108,32 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Position based on language direction */
+html[lang="ar"] .whatsapp-float {
+  right: 40px;
+}
+
+html[lang="en"] .whatsapp-float,
+html[lang="fr"] .whatsapp-float {
+  right: 40px; /* Changed from left to right for consistency */
+}
+
 .whatsapp-float:hover {
   background-color: #128c7e;
   transform: scale(1.1);
+}
+
+.whatsapp-float svg,
+.whatsapp-float svg path {
+  color: white !important;
+  fill: white !important;
+}
+
+/* WhatsApp Button Styling */
+button[class*="bg-green"] svg,
+button[class*="bg-green"] svg path {
+  fill: white !important;
+  color: white !important;
 }
 
 /* Mobile Landing Page Animations */
@@ -66,6 +147,13 @@ body {
   animation: slideInRight 0.6s ease-out forwards;
   opacity: 0;
   transform: translateX(50px);
+}
+
+/* LTR languages slide from left */
+html[lang="en"] .animate-slide-in-right,
+html[lang="fr"] .animate-slide-in-right {
+  animation: slideInLeft 0.6s ease-out forwards;
+  transform: translateX(-50px);
 }
 
 .animate-bounce-gentle {
@@ -104,6 +192,13 @@ body {
   }
 }
 
+@keyframes slideInLeft {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 @keyframes bounceGentle {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
@@ -136,9 +231,15 @@ body {
   .whatsapp-float {
     width: 55px;
     height: 55px;
-    bottom: 15px;
-    left: 15px;
+    bottom: 20px;
+    right: 20px;
     font-size: 26px;
+  }
+  
+  html[lang="ar"] .whatsapp-float,
+  html[lang="en"] .whatsapp-float,
+  html[lang="fr"] .whatsapp-float {
+    right: 20px;
   }
 }
 

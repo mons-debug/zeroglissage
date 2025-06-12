@@ -22,6 +22,11 @@ export const BeforeAfterCompare: React.FC<BeforeAfterCompareProps> = ({
 }) => {
   const [sliderPosition, setSliderPosition] = useState(initialPosition)
   const [isDragging, setIsDragging] = useState(false)
+  
+  // Touch tracking for better mobile interaction
+  const [touchStart, setTouchStart] = useState<{ x: number, y: number } | null>(null)
+  const [isHorizontalDrag, setIsHorizontalDrag] = useState(false)
+  
   const containerRef = useRef<HTMLDivElement>(null)
 
   const updateSliderPosition = useCallback((clientX: number) => {
@@ -49,28 +54,57 @@ export const BeforeAfterCompare: React.FC<BeforeAfterCompareProps> = ({
   }, [])
 
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    setIsDragging(true)
-    updateSliderPosition(e.touches[0].clientX)
-  }, [updateSliderPosition])
+    const touch = e.touches[0]
+    setTouchStart({ x: touch.clientX, y: touch.clientY })
+    setIsHorizontalDrag(false)
+    
+    // Don't prevent default immediately - let's see the movement direction first
+  }, [])
 
   const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (isDragging) {
-      updateSliderPosition(e.touches[0].clientX)
+    if (!touchStart) return
+
+    const touch = e.touches[0]
+    const deltaX = Math.abs(touch.clientX - touchStart.x)
+    const deltaY = Math.abs(touch.clientY - touchStart.y)
+    
+    // Determine if this is a horizontal or vertical gesture
+    if (!isDragging && !isHorizontalDrag) {
+      // Only start dragging if horizontal movement is dominant
+      if (deltaX > deltaY && deltaX > 10) {
+        setIsDragging(true)
+        setIsHorizontalDrag(true)
+        e.preventDefault() // Now prevent default since we confirmed horizontal drag
+        updateSliderPosition(touch.clientX)
+      } else if (deltaY > deltaX && deltaY > 10) {
+        // This is a vertical scroll, don't interfere
+        setTouchStart(null)
+        return
+      }
+    } else if (isDragging && isHorizontalDrag) {
+      e.preventDefault() // Prevent scrolling during horizontal drag
+      updateSliderPosition(touch.clientX)
     }
-  }, [isDragging, updateSliderPosition])
+  }, [isDragging, isHorizontalDrag, touchStart, updateSliderPosition])
 
   const handleTouchEnd = useCallback(() => {
     setIsDragging(false)
+    setIsHorizontalDrag(false)
+    setTouchStart(null)
   }, [])
 
   return (
     <div 
       ref={containerRef}
       className={`relative overflow-hidden rounded-xl bg-gray-200 ${className}`}
-      style={{ aspectRatio: '16/9' }}
+      style={{ 
+        aspectRatio: '16/9',
+        touchAction: 'pan-y pinch-zoom'
+      }}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
+      onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
@@ -113,6 +147,7 @@ export const BeforeAfterCompare: React.FC<BeforeAfterCompareProps> = ({
         {/* Slider Handle */}
         <div 
           className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg cursor-col-resize flex items-center justify-center hover:scale-110 transition-transform"
+          style={{ touchAction: 'pan-y pinch-zoom' }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         >
@@ -123,6 +158,7 @@ export const BeforeAfterCompare: React.FC<BeforeAfterCompareProps> = ({
       {/* Invisible overlay for mouse interactions */}
       <div 
         className="absolute inset-0 cursor-col-resize"
+        style={{ touchAction: 'pan-y pinch-zoom' }}
         onMouseDown={handleMouseDown}
         onTouchStart={handleTouchStart}
       />

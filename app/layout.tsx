@@ -2,32 +2,42 @@ import React from 'react'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
+import { LanguageProvider } from './hooks/useLanguage'
 
 const inter = Inter({ subsets: ['latin'] })
 
+// Dynamic metadata based on language would need to be handled in individual pages
+// For now, keeping Arabic as default with Dutch technology reference
 export const metadata: Metadata = {
   metadataBase: new URL('https://zero-glissage.vercel.app'),
-  title: 'Zero Glissage - حل مضاد للانزلاق | الحماية الكاملة لعائلتك',
+  title: 'Zero Glissage المغرب - حماية شاملة من الانزلاق',
   description: 'تقنية مبتكرة لحماية عائلتك من مخاطر الانزلاق. شفاف 100%، بدون تكسير، آمن تماماً. خدمة مهنية في جميع أنحاء المغرب.',
-  keywords: 'مضاد للانزلاق، حماية الأرضيات، أمان المنزل، Zero Glissage، المغرب، تقنية ألمانية',
+  keywords: 'مضاد للانزلاق، حماية الأرضيات، أمان المنزل، Zero Glissage، المغرب، تقنية هولندية، Anti-slip, Floor protection, Home safety, Dutch technology, Technologie anti-glisse, Protection des sols',
   authors: [{ name: 'Zero Glissage' }],
   icons: {
-    icon: '/gliisagelogo-06.png',
-    shortcut: '/gliisagelogo-06.png',
-    apple: '/gliisagelogo-06.png',
+    icon: '/favicon.ico',
   },
   openGraph: {
-    title: 'Zero Glissage - حل مضاد للانزلاق',
-    description: 'تقنية مبتكرة لحماية عائلتك من مخاطر الانزلاق',
-    url: 'https://zero-glissage.vercel.app',
-    siteName: 'Zero Glissage',
-    locale: 'ar_MA',
+    title: 'Zero Glissage - حل مضاد للانزلاق | Anti-Slip Solution',
+    description: 'تقنية مبتكرة لحماية عائلتك من مخاطر الانزلاق | Innovative technology to protect your family from slip hazards',
     type: 'website',
+    locale: 'ar_MA',
+    alternateLocale: ['en_US', 'fr_FR'],
+    siteName: 'Zero Glissage',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Zero Glissage Anti-Slip Solution'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Zero Glissage - حل مضاد للانزلاق',
     description: 'تقنية مبتكرة لحماية عائلتك من مخاطر الانزلاق',
+    images: ['/images/og-image.jpg']
   },
   robots: {
     index: true,
@@ -74,18 +84,20 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
-        {/* Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          />
-        </noscript>
-        
-        {children}
+      <body className={inter.className}>
+        <LanguageProvider>
+          {/* Google Tag Manager (noscript) */}
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+              height="0"
+              width="0"
+              style={{ display: 'none', visibility: 'hidden' }}
+            />
+          </noscript>
+          
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   )
