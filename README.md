@@ -44,10 +44,10 @@ A modern, responsive landing page for Zero Glissage - the innovative anti-slip s
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/zero-glissage.git
+git clone https://github.com/mons-debug/zeroglissage.git
 
 # Navigate to project directory
-cd zero-glissage
+cd zeroglissage
 
 # Install dependencies
 npm install
@@ -111,4 +111,4 @@ WhatsApp integration with:
 
 ---
 
-Built with ❤️ for Moroccan families' safety 
+Built with ❤️ for Moroccan families' safety
