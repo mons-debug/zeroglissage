@@ -63,12 +63,48 @@
       transform: scale(1.05); /* Less aggressive scaling on mobile */
     }
   }
+  
+  /* Prevent horizontal overflow on all levels */
+  .no-overflow {
+    overflow-x: hidden;
+    max-width: 100vw;
+  }
+  
+  /* Ensure mobile carousel doesn't overflow */
+  .mobile-carousel-container {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  
+  .mobile-carousel-content {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+    /* Ensure proper scrolling without overflow */
+    min-width: fit-content;
+    width: max-content;
+  }
+  
+  .mobile-card {
+    flex-shrink: 0;
+    width: min(20rem, calc(100vw - 3rem)); /* Responsive width with max constraint */
+    max-width: calc(100vw - 3rem);
+  }
 }
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+/* Root level overflow prevention */
+html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  position: relative;
 }
 
 /* Smooth scrolling optimization */
@@ -93,6 +129,15 @@ body {
   line-height: 1.6;
   transition: font-family 0.3s ease; /* Only animate font changes */
   overflow-x: hidden; /* Prevent horizontal scroll glitches */
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure all major containers don't overflow */
+#__next,
+.min-h-screen {
+  overflow-x: hidden;
+  max-width: 100vw;
 }
 
 /* Arabic (default) */

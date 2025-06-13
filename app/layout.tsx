@@ -53,20 +53,37 @@ export default function RootLayout({
   return (
     <html lang="ar" dir="rtl">
       <head>
-        {/* Google Tag Manager */}
+        <title>Zero Glissage</title>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Zero Glissage - تقنية هولندية متطورة لمنع الانزلاق على الأرضيات بدون تكسير أو تغيير المظهر" />
+        <meta name="keywords" content="zero glissage, anti-slip, morocco, holland technology, تقنية هولندية, مانع انزلاق, المغرب, sécurité sol, technologie hollandaise" />
+        
+        {/* Open Graph */}
+        <meta property="og:title" content="Zero Glissage - Anti-Slip Technology from Holland" />
+        <meta property="og:description" content="Advanced Dutch technology to prevent slipping on floors without breaking or changing appearance" />
+        <meta property="og:type" content="website" />
+        <meta property="og:locale" content="ar_MA" />
+        <meta property="og:locale:alternate" content="en_US" />
+        <meta property="og:locale:alternate" content="fr_FR" />
+        
+        {/* Favicon */}
+        <link rel="icon" href="/favicon.ico" />
+        
+        {/* Google Analytics */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-              })(window,document,'script','dataLayer','GTM-XXXXXXX');
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'GA_MEASUREMENT_ID');
             `,
           }}
         />
         
-        {/* Meta Pixel */}
+        {/* Facebook Pixel */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -84,20 +101,22 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
-        <LanguageProvider>
-          {/* Google Tag Manager (noscript) */}
-          <noscript>
-            <iframe
-              src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-              height="0"
-              width="0"
-              style={{ display: 'none', visibility: 'hidden' }}
-            />
-          </noscript>
-          
-          {children}
-        </LanguageProvider>
+      <body className="overflow-x-hidden max-w-full">
+        <div id="root" className="overflow-x-hidden max-w-full">
+          <LanguageProvider>
+            {/* Google Tag Manager (noscript) */}
+            <noscript>
+              <iframe
+                src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+                height="0"
+                width="0"
+                style={{ display: 'none', visibility: 'hidden' }}
+              />
+            </noscript>
+            
+            {children}
+          </LanguageProvider>
+        </div>
       </body>
     </html>
   )

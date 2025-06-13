@@ -73,13 +73,13 @@ const WhatsAppButton = ({ text, className = "" }: { text: string, className?: st
   }
 
   return (
-    <button 
+    <button
       onClick={handleClick}
       className={`bg-green-600 hover:bg-green-700 text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 ${className}`}
       style={{ minHeight: '44px' }} // Ensure minimum touch target size
     >
       <WhatsAppIcon size={20} color="white" className="flex-shrink-0" />
-      <span className="whitespace-nowrap">{text}</span>
+      <span className="text-center break-words">{text}</span>
     </button>
   )
 }
@@ -140,7 +140,7 @@ export default function LandingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white scroll-smooth" style={{ scrollBehavior: 'smooth' }}>
+    <div className="min-h-screen bg-white scroll-smooth no-overflow" style={{ scrollBehavior: 'smooth' }}>
       {/* Floating WhatsApp Button */}
       <FloatingWhatsApp />
 
@@ -499,11 +499,11 @@ export default function LandingPage() {
           
           {/* Desktop Grid Layout / Mobile Carousel */}
           <div className="relative max-w-7xl mx-auto">
-            {/* Mobile Horizontal Carousel */}
-            <div className="md:hidden overflow-x-auto scrollbar-hide">
-              <div className="flex gap-4 pb-4 snap-x snap-mandatory min-w-max px-4">
+            {/* Fixed Mobile Horizontal Carousel */}
+            <div className="md:hidden mobile-carousel-container">
+              <div className="mobile-carousel-content">
                 {/* Kitchen Card */}
-                <div className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-red-500 w-80 flex-shrink-0 snap-start animate-slide-in-right animation-delay-200">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-red-500 snap-start animate-slide-in-right animation-delay-200">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
                       <div className="bg-gradient-to-br from-red-100 to-red-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
@@ -524,7 +524,7 @@ export default function LandingPage() {
                 </div>
                 
                 {/* Bathroom Card */}
-                <div className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500 w-80 flex-shrink-0 snap-start animate-slide-in-right animation-delay-400">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500 snap-start animate-slide-in-right animation-delay-400">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
                       <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
@@ -545,7 +545,7 @@ export default function LandingPage() {
                 </div>
                 
                 {/* Stairs Card */}
-                <div className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-green-500 w-80 flex-shrink-0 snap-start animate-slide-in-right animation-delay-600">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-green-500 snap-start animate-slide-in-right animation-delay-600">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
                       <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
@@ -566,7 +566,7 @@ export default function LandingPage() {
                 </div>
                 
                 {/* Pool Card */}
-                <div className="group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-cyan-500 w-80 flex-shrink-0 snap-start animate-slide-in-right animation-delay-800">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-cyan-500 snap-start animate-slide-in-right animation-delay-800">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
                       <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
