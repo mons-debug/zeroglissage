@@ -15,7 +15,7 @@
     display: none;  /* Safari and Chrome */
   }
   
-  /* Better touch handling for sliders */
+  /* Enhanced touch handling for sliders with better mobile support */
   .touch-pan-y {
     touch-action: pan-y pinch-zoom;
   }
@@ -26,6 +26,42 @@
   
   .touch-manipulation {
     touch-action: manipulation;
+  }
+  
+  /* Improved mobile touch interactions */
+  .touch-slider {
+    touch-action: pan-y pinch-zoom;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Enhanced slider responsiveness */
+  .slider-handle {
+    cursor: grab;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    will-change: transform;
+  }
+  
+  .slider-handle:active {
+    cursor: grabbing;
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  @media (max-width: 768px) {
+    .slider-handle {
+      /* Larger touch targets on mobile */
+      min-width: 44px;
+      min-height: 44px;
+    }
+    
+    .slider-handle:active {
+      transform: scale(1.05); /* Less aggressive scaling on mobile */
+    }
   }
 }
 
@@ -40,6 +76,8 @@ html {
   direction: rtl; /* Default to Arabic RTL */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch; /* Enable momentum scrolling on iOS */
+  /* Improved touch responsiveness */
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Language-specific font families */

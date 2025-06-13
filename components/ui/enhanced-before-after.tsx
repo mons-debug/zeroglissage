@@ -31,14 +31,25 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
   const [showInstructions, setShowInstructions] = useState(true)
   const [hasInteracted, setHasInteracted] = useState(false)
   
-  // Touch tracking for better mobile interaction - improved logic
+  // Enhanced touch tracking for better mobile interaction
   const [touchStart, setTouchStart] = useState<{ x: number, y: number, time: number } | null>(null)
   const [isHorizontalDrag, setIsHorizontalDrag] = useState(false)
   const [touchMoved, setTouchMoved] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   
   const containerRef = useRef<HTMLDivElement>(null)
 
   const currentComparison = comparisons[currentIndex]
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768 || 'ontouchstart' in window)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Translation helper
   const getInstructionText = () => {
@@ -123,7 +134,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     setIsDragging(false)
   }, [])
 
-  // Improved touch handling that doesn't interfere with page scrolling
+  // Significantly improved touch handling with better mobile sensitivity
   const handleTouchStart = useCallback((e: React.TouchEvent) => {
     const touch = e.touches[0]
     setTouchStart({ 
@@ -134,7 +145,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     setIsHorizontalDrag(false)
     setTouchMoved(false)
     
-    // Don't prevent default here - let the browser handle scrolling initially
+    // Don't prevent default initially - let browser handle scroll detection
   }, [])
 
   const handleTouchMove = useCallback((e: TouchEvent) => {
@@ -145,29 +156,30 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     const deltaY = Math.abs(touch.clientY - touchStart.y)
     const totalMovement = deltaX + deltaY
     
-    // Only consider this a real gesture if there's significant movement
-    if (totalMovement < 5) return
+    // Much more sensitive detection for mobile - reduced threshold
+    if (totalMovement < 3) return
     
     setTouchMoved(true)
     
-    // More strict horizontal detection - only interfere with scroll if it's clearly horizontal
-    if (!isDragging && !isHorizontalDrag && totalMovement > 15) {
-      const isHorizontal = deltaX > deltaY && deltaX > 20
+    // More lenient horizontal detection for better mobile UX
+    if (!isDragging && !isHorizontalDrag && totalMovement > 8) {
+      const isHorizontal = deltaX > deltaY && deltaX > 10
       const horizontalRatio = deltaX / (deltaY || 1)
       
-      if (isHorizontal && horizontalRatio > 2) {
-        // This is clearly a horizontal drag on the slider
+      // More forgiving horizontal detection
+      if (isHorizontal && horizontalRatio > 1.2) {
+        // This is horizontal drag on the slider
         setIsDragging(true)
         setIsHorizontalDrag(true)
-        e.preventDefault() // Only now prevent default
+        e.preventDefault()
         updateSliderPosition(touch.clientX)
-      } else if (deltaY > deltaX && deltaY > 20) {
-        // This is clearly vertical scrolling - don't interfere
+      } else if (deltaY > deltaX && deltaY > 15) {
+        // Clear vertical scrolling - don't interfere
         setTouchStart(null)
         return
       }
     } else if (isDragging && isHorizontalDrag) {
-      // Continue horizontal dragging
+      // Continue horizontal dragging with smooth updates
       e.preventDefault()
       updateSliderPosition(touch.clientX)
     }
@@ -180,13 +192,13 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     setTouchMoved(false)
   }, [])
 
-  // Improved event listener management
+  // Optimized event listener management
   useEffect(() => {
     if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove)
-      document.addEventListener('mouseup', handleMouseUp)
+      document.addEventListener('mousemove', handleMouseMove, { passive: false })
+      document.addEventListener('mouseup', handleMouseUp, { passive: true })
       
-      // Only add touch listeners if we're actually dragging
+      // Enhanced touch move handling for mobile
       if (isHorizontalDrag) {
         document.addEventListener('touchmove', handleTouchMove, { passive: false })
       }
@@ -216,10 +228,10 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
       {/* Main Comparison Container */}
       <div 
         ref={containerRef}
-        className="relative overflow-hidden rounded-2xl bg-gray-200 shadow-2xl group cursor-pointer select-none"
+        className="relative overflow-hidden rounded-2xl bg-gray-200 shadow-2xl group cursor-pointer select-none touch-slider"
         style={{ 
           aspectRatio: '16/10',
-          touchAction: 'pan-y pinch-zoom' // Allow vertical scrolling and pinch zoom
+          touchAction: isMobile ? 'pan-y pinch-zoom' : 'auto' // Dynamic touch action
         }}
         onTouchStart={handleTouchStart}
       >
@@ -241,9 +253,11 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
 
         {/* Before Image (Foreground with clip) */}
         <div 
-          className="absolute inset-0 transition-all duration-200 ease-out pointer-events-none"
+          className="absolute inset-0 transition-all duration-100 ease-out pointer-events-none"
           style={{
-            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`
+            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+            // Faster transitions for more responsive feel
+            transition: isDragging ? 'none' : 'clip-path 0.1s ease-out'
           }}
         >
           <img
@@ -275,42 +289,58 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           </div>
         )}
 
-        {/* Slider Line and Handle */}
+        {/* Enhanced Slider Line and Handle with better mobile sizing */}
         <div 
-          className="absolute top-0 bottom-0 w-1 bg-white shadow-2xl cursor-col-resize z-20 group-hover:w-2 transition-all duration-200 pointer-events-none"
+          className={`absolute top-0 bottom-0 bg-white shadow-2xl cursor-col-resize z-20 transition-all duration-200 pointer-events-none ${
+            isMobile ? 'w-2' : 'w-1 group-hover:w-2'
+          }`}
           style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Interactive Slider Handle */}
+          {/* Enhanced Interactive Slider Handle with larger mobile touch target */}
           <div 
-            className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-14 h-14 bg-white rounded-full shadow-2xl cursor-col-resize flex items-center justify-center hover:scale-110 transition-all duration-300 z-30 pointer-events-auto ${isDragging ? 'scale-125 shadow-blue-500/50' : ''}`}
-            style={{ touchAction: 'none' }} // Disable touch action on the handle itself
+            className={`slider-handle absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 z-30 pointer-events-auto ${
+              isMobile ? 'w-16 h-16 hover:scale-105' : 'w-14 h-14 hover:scale-110'
+            } ${isDragging ? 'scale-125 shadow-blue-500/50' : ''}`}
+            style={{ touchAction: 'none' }}
             onMouseDown={handleMouseDown}
             onTouchStart={handleTouchStart}
           >
-            <Move className="w-6 h-6 text-gray-700" />
+            <Move className={`text-gray-700 ${isMobile ? 'w-7 h-7' : 'w-6 h-6'}`} />
             {!hasInteracted && (
               <div className="absolute inset-0 rounded-full border-4 border-yellow-400 opacity-70 animate-ping"></div>
             )}
           </div>
 
-          {/* Vertical indicators */}
-          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg pointer-events-none"></div>
-          <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-4 h-4 bg-white rounded-full shadow-lg pointer-events-none"></div>
+          {/* Enhanced vertical indicators with better mobile visibility */}
+          <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 bg-white rounded-full shadow-lg pointer-events-none ${
+            isMobile ? 'w-5 h-5' : 'w-4 h-4'
+          }`}></div>
+          <div className={`absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-white rounded-full shadow-lg pointer-events-none ${
+            isMobile ? 'w-5 h-5' : 'w-4 h-4'
+          }`}></div>
         </div>
 
-        {/* Interactive overlay - This captures all clicks/drags but with better touch handling */}
+        {/* Enhanced interactive overlay with improved touch handling */}
         <div 
-          className="absolute inset-0 cursor-col-resize z-10"
-          style={{ touchAction: 'pan-y pinch-zoom' }} // Allow vertical scrolling
+          className="absolute inset-0 cursor-col-resize z-10 touch-slider"
+          style={{ 
+            touchAction: isMobile ? 'pan-y pinch-zoom' : 'auto',
+            // Add larger touch target area on mobile
+            padding: isMobile ? '10px' : '0',
+            margin: isMobile ? '-10px' : '0'
+          }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         />
 
-        {/* Progress indicator */}
+        {/* Enhanced progress indicator */}
         <div className="absolute bottom-0 left-0 right-0 h-2 bg-black/20 pointer-events-none">
           <div 
-            className="h-full bg-gradient-to-r from-red-500 to-green-500 transition-all duration-200"
-            style={{ width: `${sliderPosition}%` }}
+            className="h-full bg-gradient-to-r from-red-500 to-green-500 transition-all duration-100"
+            style={{ 
+              width: `${sliderPosition}%`,
+              transition: isDragging ? 'none' : 'width 0.1s ease-out'
+            }}
           />
         </div>
       </div>
