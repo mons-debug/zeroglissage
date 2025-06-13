@@ -342,7 +342,7 @@ export const translations: Record<Language, Translations> = {
     
     footer: {
       description: "الحل الأمثل لحماية عائلتك من مخاطر الانزلاق. تقنية مبتكرة، نتائج مضمونة، وخدمة عالية الجودة.",
-      copyright: "© 2024 Zero Glissage. جميع الحقوق محفوظة."
+      copyright: "© 2025 Zero Glissage. جميع الحقوق محفوظة."
     },
     
     ctas: {
@@ -532,7 +532,7 @@ export const translations: Record<Language, Translations> = {
     
     footer: {
       description: "The optimal solution to protect your family from slip hazards. Innovative technology, guaranteed results, and high-quality service.",
-      copyright: "© 2024 Zero Glissage. All rights reserved."
+      copyright: "© 2025 Zero Glissage. All rights reserved."
     },
     
     ctas: {
@@ -722,7 +722,7 @@ export const translations: Record<Language, Translations> = {
     
     footer: {
       description: "La solution optimale pour protéger votre famille des risques de glissade. Technologie innovante, résultats garantis et service de haute qualité.",
-      copyright: "© 2024 Zero Glissage. Tous droits réservés."
+      copyright: "© 2025 Zero Glissage. Tous droits réservés."
     },
     
     ctas: {

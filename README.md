@@ -107,7 +107,7 @@ WhatsApp integration with:
 
 ## 📄 License
 
-© 2024 Zero Glissage. All rights reserved.
+© 2025 Zero Glissage. All rights reserved.
 
 ---
 

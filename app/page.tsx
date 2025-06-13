@@ -75,10 +75,10 @@ const WhatsAppButton = ({ text, className = "" }: { text: string, className?: st
   return (
     <button
       onClick={handleClick}
-      className={`bg-green-600 hover:bg-green-700 text-white font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 ${className}`}
+      className={`bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 ${className}`}
       style={{ minHeight: '44px' }} // Ensure minimum touch target size
     >
-      <WhatsAppIcon size={20} color="white" className="flex-shrink-0" />
+      <WhatsAppIcon size={20} color="black" className="flex-shrink-0" />
       <span className="text-center break-words">{text}</span>
     </button>
   )
@@ -104,8 +104,8 @@ const FloatingWhatsApp = () => {
         height: '60px',
         bottom: '40px',
         right: '40px',
-        backgroundColor: '#25d366',
-        color: '#FFF',
+        backgroundColor: '#eab308', // Yellow-500
+        color: '#000',
         borderRadius: '50px',
         textAlign: 'center',
         boxShadow: '2px 2px 3px #999',
@@ -117,7 +117,7 @@ const FloatingWhatsApp = () => {
         transition: 'all 0.3s ease'
       }}
     >
-      <WhatsAppIcon size={28} color="white" />
+      <WhatsAppIcon size={28} color="black" />
     </div>
   )
 }
@@ -157,9 +157,9 @@ export default function LandingPage() {
           <LanguageSwitcher />
         </div>
         
-        {/* No overlay on mobile, light overlay on desktop */}
-        <div className="absolute inset-0 bg-transparent md:bg-black/10 lg:bg-black/30"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent md:from-blue-900/30 lg:from-blue-900/40"></div>
+        {/* Dark overlay for better contrast */}
+        <div className="absolute inset-0 bg-black/40 md:bg-black/50 lg:bg-black/60"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center max-w-6xl mx-auto">
@@ -177,10 +177,10 @@ export default function LandingPage() {
               {t.hero.title}
             </h1>
             
-            <p className="text-xl md:text-2xl lg:text-2xl xl:text-3xl mb-8 text-blue-100 font-medium max-w-4xl mx-auto animate-fade-in-up animation-delay-400">
+            <p className="text-xl md:text-2xl lg:text-2xl xl:text-3xl mb-8 text-gray-100 font-medium max-w-4xl mx-auto animate-fade-in-up animation-delay-400">
               {t.hero.subtitle}
               <br />
-              <span className="text-yellow-300">
+              <span className="text-yellow-400">
                 {language === 'ar' ? 'بدون تكسير • شفاف • آمن 100%' : 
                  language === 'en' ? 'No Breaking • Transparent • 100% Safe' :
                  'Sans Casse • Transparent • 100% Sûr'}
@@ -192,7 +192,7 @@ export default function LandingPage() {
                 text={t.hero.cta} 
                 className="text-lg lg:text-xl px-10 py-5 w-full sm:w-auto mx-auto animate-bounce-gentle"
               />
-              <div className="flex items-center text-green-300 font-semibold text-base lg:text-lg animate-pulse-gentle">
+              <div className="flex items-center text-yellow-300 font-semibold text-base lg:text-lg animate-pulse-gentle">
                 <CheckCircle className="w-5 h-5 ml-2" />
                 {language === 'ar' ? 'فحص وتجربة مجانية في منزلك' :
                  language === 'en' ? 'Free inspection and trial at your home' :
@@ -210,7 +210,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1000">
-                <div className="text-2xl lg:text-3xl font-bold text-green-400 animate-count-up">100%</div>
+                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">100%</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'ضمان الجودة' :
                    language === 'en' ? 'Quality Guarantee' :
@@ -218,7 +218,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1200">
-                <div className="text-2xl lg:text-3xl font-bold text-blue-300 animate-count-up">24h</div>
+                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">24h</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'خدمة سريعة' :
                    language === 'en' ? 'Fast Service' :
@@ -226,7 +226,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1400">
-                <div className="text-2xl lg:text-3xl font-bold text-purple-300 animate-count-up">5★</div>
+                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">5★</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'تقييم العملاء' :
                    language === 'en' ? 'Customer Rating' :
@@ -239,7 +239,7 @@ export default function LandingPage() {
       </section>
 
       {/* Problem Section - Glass Morphism Design */}
-      <section className="relative py-12 md:py-16 lg:py-24 bg-gradient-to-br from-red-50 via-red-25 to-orange-50 overflow-hidden">
+      <section className="relative py-12 md:py-16 lg:py-24 bg-gradient-to-br from-yellow-50 via-yellow-25 to-amber-50 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           {/* Mobile Layout - Full Width Image with Overlay (unchanged) */}
@@ -252,17 +252,17 @@ export default function LandingPage() {
               />
               
               {/* Image overlay for better contrast */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
               
               {/* Mobile: Centered Glass Overlay */}
               <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
-                <div className="bg-white/5 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-white/10 relative overflow-hidden max-w-4xl w-full my-auto mt-[15vh]">
+                <div className="bg-black/20 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-yellow-500/30 relative overflow-hidden max-w-4xl w-full my-auto mt-[15vh]">
                   {/* Subtle background pattern */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-red-500/5 rounded-3xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-black/10 rounded-3xl"></div>
                   
                   {/* Content */}
                   <div className="relative z-10 text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-red-500/90 backdrop-blur-sm rounded-full mb-4 shadow-xl">
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-yellow-500/90 backdrop-blur-sm rounded-full mb-4 shadow-xl">
                       <img 
                         src="/gliisagelogo-06.png" 
                         alt="خطر الانزلاق" 
@@ -282,7 +282,7 @@ export default function LandingPage() {
                          language === 'en' ? 'Every year, thousands of people suffer serious accidents due to slipping in homes.' :
                          'Chaque année, des milliers de personnes subissent des accidents graves dus aux glissades à domicile.'}
                       </p>
-                      <div className="bg-red-600/95 backdrop-blur-sm rounded-2xl px-4 py-3 inline-block shadow-xl border border-red-400/70">
+                      <div className="bg-yellow-600/95 backdrop-blur-sm rounded-2xl px-4 py-3 inline-block shadow-xl border border-yellow-400/70">
                         <p className="text-lg md:text-xl font-bold text-white drop-shadow-lg">
                           {language === 'ar' ? 'لا تنتظر حتى يحدث الحادث!' :
                            language === 'en' ? 'Don\'t wait until an accident happens!' :
@@ -296,7 +296,7 @@ export default function LandingPage() {
               
               {/* Bottom Caption */}
               <div className="absolute bottom-8 left-6 right-6">
-                <div className="bg-black/40 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-white/20">
+                <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-yellow-500/30">
                   <h3 className="text-base md:text-lg font-bold text-white mb-1 drop-shadow-lg">
                     {language === 'ar' ? 'هذا ما يحدث كل يوم في البيوت المغربية' :
                      language === 'en' ? 'This happens every day in Moroccan homes' :
@@ -312,7 +312,7 @@ export default function LandingPage() {
               
               {/* Floating Danger Badge */}
               <div className="absolute top-6 right-6">
-                <div className="bg-red-600/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-red-400/50 flex items-center gap-2">
+                <div className="bg-yellow-600/90 backdrop-blur-sm text-black px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-yellow-400/50 flex items-center gap-2">
                   <img 
                     src="/gliisagelogo-06.png" 
                     alt="خطر الانزلاق" 
@@ -340,8 +340,8 @@ export default function LandingPage() {
                 {/* Small CTA Overlay on Image */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">
-                  <div className="bg-white/10 backdrop-blur-md rounded-2xl p-4 xl:p-6 border border-white/20 text-center">
-                    <div className="bg-red-500/90 rounded-full w-12 h-12 xl:w-16 xl:h-16 flex items-center justify-center mx-auto mb-3 shadow-xl">
+                  <div className="bg-black/20 backdrop-blur-md rounded-2xl p-4 xl:p-6 border border-yellow-500/30 text-center">
+                    <div className="bg-yellow-500/90 rounded-full w-12 h-12 xl:w-16 xl:h-16 flex items-center justify-center mx-auto mb-3 shadow-xl">
                       <img 
                         src="/gliisagelogo-06.png" 
                         alt="خطر الانزلاق" 
@@ -364,7 +364,7 @@ export default function LandingPage() {
                 
                 {/* Floating Badge */}
                 <div className="absolute top-4 right-4">
-                  <div className="bg-red-600/90 backdrop-blur-sm text-white px-3 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-red-400/50 flex items-center gap-2">
+                  <div className="bg-yellow-600/90 backdrop-blur-sm text-black px-3 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-yellow-400/50 flex items-center gap-2">
                     <img 
                       src="/gliisagelogo-06.png" 
                       alt="خطر الانزلاق" 
@@ -383,7 +383,7 @@ export default function LandingPage() {
               <div className="space-y-6 xl:space-y-8">
                 {/* Main Title */}
                 <div className="text-center lg:text-right">
-                  <div className="bg-red-500/90 backdrop-blur-sm rounded-full w-16 h-16 xl:w-20 xl:h-20 flex items-center justify-center shadow-xl mb-6 mx-auto lg:mx-0 lg:mr-auto">
+                  <div className="bg-yellow-500/90 backdrop-blur-sm rounded-full w-16 h-16 xl:w-20 xl:h-20 flex items-center justify-center shadow-xl mb-6 mx-auto lg:mx-0 lg:mr-auto">
                     <img 
                       src="/gliisagelogo-06.png" 
                       alt="خطر الانزلاق" 
@@ -395,7 +395,7 @@ export default function LandingPage() {
                     {language === 'ar' ? 'خطر الانزلاق' :
                      language === 'en' ? 'Slip Hazard' :
                      'Risque de Glissade'}<br />
-                    <span className="text-red-600">
+                    <span className="text-yellow-600">
                       {language === 'ar' ? 'يهدد سلامة عائلتك!' :
                        language === 'en' ? 'threatens your family\'s safety!' :
                        'menace la sécurité de votre famille!'}
@@ -411,25 +411,25 @@ export default function LandingPage() {
                 
                 {/* Main Danger Zones - Only 2 Most Important */}
                 <div className="bg-white rounded-2xl p-6 xl:p-8 shadow-lg border border-gray-100">
-                  <h3 className="text-2xl xl:text-3xl font-bold mb-6 text-orange-600 text-center">
+                  <h3 className="text-2xl xl:text-3xl font-bold mb-6 text-yellow-600 text-center">
                     ⚠️ {language === 'ar' ? 'المناطق الأكثر خطورة' :
                           language === 'en' ? 'Most Dangerous Areas' :
                           'Zones les Plus Dangereuses'}
                   </h3>
                   <div className="grid grid-cols-2 gap-6">
-                    <div className="bg-red-600 text-white rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div className="bg-yellow-600 text-black rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
                       <div className="text-4xl mb-3">🚿</div>
                       <div className="font-bold text-xl">{t.problem.cards.bathroom.title}</div>
-                      <div className="text-red-100 text-sm mt-1">
+                      <div className="text-black/80 text-sm mt-1">
                         {language === 'ar' ? 'الأخطر' :
                          language === 'en' ? 'Most dangerous' :
                          'Le plus dangereux'}
                       </div>
                     </div>
-                    <div className="bg-orange-600 text-white rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div className="bg-yellow-600 text-black rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
                       <div className="text-4xl mb-3">🍳</div>
                       <div className="font-bold text-xl">{t.problem.cards.kitchen.title}</div>
-                      <div className="text-orange-100 text-sm mt-1">
+                      <div className="text-black/80 text-sm mt-1">
                         {language === 'ar' ? 'خطر عالي' :
                          language === 'en' ? 'High risk' :
                          'Risque élevé'}
@@ -439,7 +439,7 @@ export default function LandingPage() {
                 </div>
                 
                 {/* Solution CTA - Simplified */}
-                <div className="bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-2xl p-6 xl:p-8 shadow-lg text-center">
+                <div className="bg-gradient-to-r from-yellow-500 to-black text-white rounded-2xl p-6 xl:p-8 shadow-lg text-center">
                   <h3 className="text-2xl xl:text-3xl font-bold mb-6">
                     ✅ {language === 'ar' ? 'الحل مع Zero Glissage' :
                           language === 'en' ? 'The Solution with Zero Glissage' :
@@ -484,12 +484,12 @@ export default function LandingPage() {
         </div>
         
         {/* Background decorative elements */}
-        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-red-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-60 h-60 lg:w-80 lg:h-80 bg-orange-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-yellow-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-60 h-60 lg:w-80 lg:h-80 bg-amber-200/20 rounded-full blur-3xl"></div>
       </section>
 
       {/* Enhanced Responsive Cards Grid */}
-      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-red-50 via-red-25 to-orange-50">
+      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-yellow-50 via-yellow-25 to-amber-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 mb-6">
@@ -503,11 +503,11 @@ export default function LandingPage() {
             <div className="md:hidden mobile-carousel-container">
               <div className="mobile-carousel-content">
                 {/* Kitchen Card */}
-                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-red-500 snap-start animate-slide-in-right animation-delay-200">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-500 snap-start animate-slide-in-right animation-delay-200">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div className="bg-gradient-to-br from-red-100 to-red-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
-                        <ChefHat className="w-7 h-7 text-red-600" />
+                      <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
+                        <ChefHat className="w-7 h-7 text-yellow-600" />
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -516,19 +516,19 @@ export default function LandingPage() {
                         {t.problem.cards.kitchen.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                        <span className="text-red-500 text-sm font-semibold">{t.problem.cards.kitchen.danger}</span>
+                        <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                        <span className="text-yellow-500 text-sm font-semibold">{t.problem.cards.kitchen.danger}</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Bathroom Card */}
-                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500 snap-start animate-slide-in-right animation-delay-400">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-black snap-start animate-slide-in-right animation-delay-400">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
-                        <Droplets className="w-7 h-7 text-blue-600" />
+                      <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
+                        <Droplets className="w-7 h-7 text-black" />
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -537,19 +537,19 @@ export default function LandingPage() {
                         {t.problem.cards.bathroom.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                        <span className="text-red-500 text-sm font-semibold">{t.problem.cards.bathroom.danger}</span>
+                        <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                        <span className="text-yellow-500 text-sm font-semibold">{t.problem.cards.bathroom.danger}</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Stairs Card */}
-                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-green-500 snap-start animate-slide-in-right animation-delay-600">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-600 snap-start animate-slide-in-right animation-delay-600">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
-                        <TrendingUp className="w-7 h-7 text-green-600" />
+                      <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
+                        <TrendingUp className="w-7 h-7 text-yellow-600" />
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -558,19 +558,19 @@ export default function LandingPage() {
                         {t.problem.cards.stairs.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                        <span className="text-red-600 text-sm font-semibold">{t.problem.cards.stairs.danger}</span>
+                        <span className="w-2 h-2 bg-yellow-600 rounded-full animate-pulse"></span>
+                        <span className="text-yellow-600 text-sm font-semibold">{t.problem.cards.stairs.danger}</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Pool Card */}
-                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-cyan-500 snap-start animate-slide-in-right animation-delay-800">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-black snap-start animate-slide-in-right animation-delay-800">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
-                        <Waves className="w-7 h-7 text-cyan-600" />
+                      <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
+                        <Waves className="w-7 h-7 text-black" />
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -579,8 +579,8 @@ export default function LandingPage() {
                         {t.problem.cards.pool.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
-                        <span className="text-orange-500 text-sm font-semibold">{t.problem.cards.pool.danger}</span>
+                        <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                        <span className="text-yellow-500 text-sm font-semibold">{t.problem.cards.pool.danger}</span>
                       </div>
                     </div>
                   </div>
@@ -591,69 +591,69 @@ export default function LandingPage() {
             {/* Desktop Grid Layout */}
             <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {/* Kitchen Card */}
-              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-red-500 h-full">
+              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-500 h-full">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-red-100 to-red-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
-                    <ChefHat className="w-8 h-8 lg:w-10 lg:h-10 text-red-600" />
+                  <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
+                    <ChefHat className="w-8 h-8 lg:w-10 lg:h-10 text-yellow-600" />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">{t.problem.cards.kitchen.title}</h3>
                   <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-4">
                     {t.problem.cards.kitchen.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    <span className="text-red-500 text-sm lg:text-base font-semibold">{t.problem.cards.kitchen.danger}</span>
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.kitchen.danger}</span>
                   </div>
                 </div>
               </div>
               
               {/* Bathroom Card */}
-              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-blue-500 h-full">
+              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-black h-full">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-blue-100 to-blue-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
-                    <Droplets className="w-8 h-8 lg:w-10 lg:h-10 text-blue-600" />
+                  <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
+                    <Droplets className="w-8 h-8 lg:w-10 lg:h-10 text-black" />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">{t.problem.cards.bathroom.title}</h3>
                   <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-4">
                     {t.problem.cards.bathroom.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                    <span className="text-red-500 text-sm lg:text-base font-semibold">{t.problem.cards.bathroom.danger}</span>
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.bathroom.danger}</span>
                   </div>
                 </div>
               </div>
               
               {/* Stairs Card */}
-              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-green-500 h-full">
+              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-600 h-full">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-green-100 to-green-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
-                    <TrendingUp className="w-8 h-8 lg:w-10 lg:h-10 text-green-600" />
+                  <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
+                    <TrendingUp className="w-8 h-8 lg:w-10 lg:h-10 text-yellow-600" />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">{t.problem.cards.stairs.title}</h3>
                   <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-4">
                     {t.problem.cards.stairs.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-red-600 rounded-full animate-pulse"></span>
-                    <span className="text-red-600 text-sm lg:text-base font-semibold">{t.problem.cards.stairs.danger}</span>
+                    <span className="w-2 h-2 bg-yellow-600 rounded-full animate-pulse"></span>
+                    <span className="text-yellow-600 text-sm lg:text-base font-semibold">{t.problem.cards.stairs.danger}</span>
                   </div>
                 </div>
               </div>
               
               {/* Pool Card */}
-              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-cyan-500 h-full">
+              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-black h-full">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-cyan-100 to-cyan-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
-                    <Waves className="w-8 h-8 lg:w-10 lg:h-10 text-cyan-600" />
+                  <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
+                    <Waves className="w-8 h-8 lg:w-10 lg:h-10 text-black" />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">{t.problem.cards.pool.title}</h3>
                   <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-4">
                     {t.problem.cards.pool.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse"></span>
-                    <span className="text-orange-500 text-sm lg:text-base font-semibold">{t.problem.cards.pool.danger}</span>
+                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.pool.danger}</span>
                   </div>
                 </div>
               </div>
@@ -663,7 +663,7 @@ export default function LandingPage() {
           {/* Enhanced CTA Section */}
           <div className="text-center mt-12 md:mt-16">
             <div className="bg-white rounded-2xl p-6 sm:p-8 lg:p-10 shadow-lg max-w-4xl mx-auto mb-8">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 lg:gap-6 text-red-700">
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 lg:gap-6 text-black">
                 <div className="flex items-center gap-2">
                   <Clock className="w-5 h-5 lg:w-6 lg:h-6" />
                   <span className="font-semibold text-base lg:text-lg">
@@ -672,7 +672,7 @@ export default function LandingPage() {
                      'Chaque minute compte'}
                   </span>
                 </div>
-                <div className="hidden sm:block w-px h-6 bg-red-300"></div>
+                <div className="hidden sm:block w-px h-6 bg-gray-300"></div>
                 <div className="flex items-center gap-2">
                   <Shield className="w-5 h-5 lg:w-6 lg:h-6" />
                   <span className="font-semibold text-base lg:text-lg">
@@ -733,11 +733,11 @@ export default function LandingPage() {
       </section>
 
       {/* Enhanced Solution Features - Mobile Optimized */}
-      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-green-50 to-blue-50">
+      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-yellow-50 to-amber-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-4 lg:mb-6">
-              <span className="text-green-600">Zero Glissage</span> {t.solution.title.split(' ').slice(2).join(' ')}
+              <span className="text-yellow-600">Zero Glissage</span> {t.solution.title.split(' ').slice(2).join(' ')}
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto">
               {t.solution.subtitle}
@@ -754,7 +754,7 @@ export default function LandingPage() {
                     alt="منتج Zero Glissage المضاد للانزلاق" 
                     className="w-full h-60 md:h-72 lg:h-80 xl:h-96 object-cover"
                   />
-                  <div className="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
+                  <div className="absolute top-4 left-4 bg-yellow-600 text-black px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
                     ✅ {t.solution.original}
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 lg:p-4">
@@ -764,8 +764,8 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="order-1 md:order-2 space-y-4 lg:space-y-6">
-                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <Shield className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                   </div>
                   <div>
@@ -773,8 +773,8 @@ export default function LandingPage() {
                     <p className="text-gray-600 text-sm lg:text-base">{t.solution.imported}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-black rounded-full flex items-center justify-center flex-shrink-0">
                     <TestTube className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                   </div>
                   <div>
@@ -786,8 +786,8 @@ export default function LandingPage() {
                     <p className="text-gray-600 text-sm lg:text-base">{t.solution.certified}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-yellow-50 to-amber-100 rounded-xl">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-amber-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                   </div>
                   <div>
@@ -806,8 +806,8 @@ export default function LandingPage() {
           {/* Compact Feature Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             <div className="bg-white rounded-2xl p-4 lg:p-6 xl:p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="bg-green-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <Eye className="w-6 h-6 lg:w-8 lg:h-8 text-green-600" />
+              <div className="bg-yellow-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                <Eye className="w-6 h-6 lg:w-8 lg:h-8 text-yellow-600" />
               </div>
               <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-2 lg:mb-3">{t.solution.features.transparent.title}</h3>
               <p className="text-gray-600 text-sm lg:text-base">
@@ -816,8 +816,8 @@ export default function LandingPage() {
             </div>
             
             <div className="bg-white rounded-2xl p-4 lg:p-6 xl:p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="bg-blue-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <Wrench className="w-6 h-6 lg:w-8 lg:h-8 text-blue-600" />
+              <div className="bg-gray-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                <Wrench className="w-6 h-6 lg:w-8 lg:h-8 text-black" />
               </div>
               <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-2 lg:mb-3">{t.solution.features.noBreaking.title}</h3>
               <p className="text-gray-600 text-sm lg:text-base">
@@ -826,8 +826,8 @@ export default function LandingPage() {
             </div>
             
             <div className="bg-white rounded-2xl p-4 lg:p-6 xl:p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="bg-purple-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <Clock className="w-6 h-6 lg:w-8 lg:h-8 text-purple-600" />
+              <div className="bg-amber-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                <Clock className="w-6 h-6 lg:w-8 lg:h-8 text-amber-600" />
               </div>
               <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-2 lg:mb-3">{t.solution.features.fastDrying.title}</h3>
               <p className="text-gray-600 text-sm lg:text-base">
@@ -861,15 +861,15 @@ export default function LandingPage() {
           </div>
           
           {/* Combined Process & Visual */}
-          <div className="bg-gradient-to-br from-gray-50 to-blue-50 rounded-3xl p-6 md:p-8 lg:p-12 mb-8 lg:mb-12">
+          <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-3xl p-6 md:p-8 lg:p-12 mb-8 lg:mb-12">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Process Steps */}
               <div className="space-y-4 lg:space-y-6">
                 <div className="flex items-center gap-4 bg-white rounded-2xl p-4 lg:p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="bg-blue-500 text-white rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">1</div>
+                  <div className="bg-yellow-500 text-black rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">1</div>
                   <div className="flex items-center gap-3">
-                    <div className="bg-blue-100 rounded-xl p-3 lg:p-4">
-                      <Search className="w-6 h-6 lg:w-7 lg:h-7 text-blue-600" />
+                    <div className="bg-yellow-100 rounded-xl p-3 lg:p-4">
+                      <Search className="w-6 h-6 lg:w-7 lg:h-7 text-yellow-600" />
                     </div>
                     <div>
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800">{t.howItWorks.steps.inspection.title}</h3>
@@ -879,10 +879,10 @@ export default function LandingPage() {
                 </div>
                 
                 <div className="flex items-center gap-4 bg-white rounded-2xl p-4 lg:p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="bg-green-500 text-white rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">2</div>
+                  <div className="bg-black text-white rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">2</div>
                   <div className="flex items-center gap-3">
-                    <div className="bg-green-100 rounded-xl p-3 lg:p-4">
-                      <Droplets className="w-6 h-6 lg:w-7 lg:h-7 text-green-600" />
+                    <div className="bg-gray-100 rounded-xl p-3 lg:p-4">
+                      <Droplets className="w-6 h-6 lg:w-7 lg:h-7 text-black" />
                     </div>
                     <div>
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800">{t.howItWorks.steps.cleaning.title}</h3>
@@ -892,10 +892,10 @@ export default function LandingPage() {
                 </div>
                 
                 <div className="flex items-center gap-4 bg-white rounded-2xl p-4 lg:p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="bg-purple-500 text-white rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">3</div>
+                  <div className="bg-yellow-600 text-black rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">3</div>
                   <div className="flex items-center gap-3">
-                    <div className="bg-purple-100 rounded-xl p-3 lg:p-4">
-                      <Brush className="w-6 h-6 lg:w-7 lg:h-7 text-purple-600" />
+                    <div className="bg-yellow-100 rounded-xl p-3 lg:p-4">
+                      <Brush className="w-6 h-6 lg:w-7 lg:h-7 text-yellow-600" />
                     </div>
                     <div>
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800">{t.howItWorks.steps.application.title}</h3>
@@ -905,10 +905,10 @@ export default function LandingPage() {
                 </div>
                 
                 <div className="flex items-center gap-4 bg-white rounded-2xl p-4 lg:p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="bg-orange-500 text-white rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">4</div>
+                  <div className="bg-black text-white rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">4</div>
                   <div className="flex items-center gap-3">
-                    <div className="bg-orange-100 rounded-xl p-3 lg:p-4">
-                      <TestTube className="w-6 h-6 lg:w-7 lg:h-7 text-orange-600" />
+                    <div className="bg-gray-100 rounded-xl p-3 lg:p-4">
+                      <TestTube className="w-6 h-6 lg:w-7 lg:h-7 text-black" />
                     </div>
                     <div>
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800">{t.howItWorks.steps.testing.title}</h3>
@@ -926,26 +926,26 @@ export default function LandingPage() {
                     alt="عملية التنظيف العميق للأرضية بتقنية Zero Glissage" 
                     className="w-full h-64 md:h-80 lg:h-96 xl:h-[28rem] object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-green-600/20"></div>
-                  <div className="absolute top-4 left-4 bg-blue-600 text-white px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
+                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-black/20"></div>
+                  <div className="absolute top-4 left-4 bg-yellow-600 text-black px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
                     🧽 {language === 'ar' ? 'تنظيف مهني' : language === 'en' ? 'Professional Cleaning' : 'Nettoyage Professionnel'}
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 lg:p-4">
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
-                        <div className="text-xl lg:text-2xl font-bold text-blue-600">1</div>
+                        <div className="text-xl lg:text-2xl font-bold text-yellow-600">1</div>
                         <div className="text-xs lg:text-sm text-gray-700">
                           {language === 'ar' ? 'إزالة الأوساخ' : language === 'en' ? 'Remove dirt' : 'Enlever saleté'}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xl lg:text-2xl font-bold text-green-600">2</div>
+                        <div className="text-xl lg:text-2xl font-bold text-black">2</div>
                         <div className="text-xs lg:text-sm text-gray-700">
                           {language === 'ar' ? 'تنظيف عميق' : language === 'en' ? 'Deep clean' : 'Nettoyage profond'}
                         </div>
                       </div>
                       <div>
-                        <div className="text-xl lg:text-2xl font-bold text-purple-600">3</div>
+                        <div className="text-xl lg:text-2xl font-bold text-yellow-600">3</div>
                         <div className="text-xs lg:text-sm text-gray-700">
                           {language === 'ar' ? 'تحضير السطح' : language === 'en' ? 'Prepare surface' : 'Préparer surface'}
                         </div>
@@ -978,10 +978,10 @@ export default function LandingPage() {
       </section>
 
       {/* Modern Testimonials Carousel */}
-      <section className="py-16 lg:py-24 xl:py-32 bg-gradient-to-br from-blue-50 via-white to-green-50 relative overflow-hidden">
+      <section className="py-16 lg:py-24 xl:py-32 bg-gradient-to-br from-yellow-50 via-white to-amber-50 relative overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-blue-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-20 left-10 w-60 h-60 lg:w-80 lg:h-80 bg-green-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-yellow-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-60 h-60 lg:w-80 lg:h-80 bg-amber-200/20 rounded-full blur-3xl"></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16 lg:mb-20">
@@ -998,7 +998,7 @@ export default function LandingPage() {
             {/* Main Testimonial Card */}
             <div className="bg-white rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl border border-gray-100 relative overflow-hidden">
               {/* Quote Icon */}
-              <div className="absolute top-6 right-6 lg:top-8 lg:right-8 text-6xl lg:text-8xl text-blue-100 font-serif">"</div>
+              <div className="absolute top-6 right-6 lg:top-8 lg:right-8 text-6xl lg:text-8xl text-yellow-100 font-serif">"</div>
               
               {/* Stars Rating */}
               <div className="flex justify-center mb-6 lg:mb-8">
@@ -1028,16 +1028,16 @@ export default function LandingPage() {
             {/* Navigation Buttons */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-blue-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
+              className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-yellow-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
             >
-              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-blue-600" />
+              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-yellow-600" />
             </button>
             
             <button
               onClick={nextTestimonial}
-              className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-blue-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
+              className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-yellow-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
             >
-              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-blue-600" />
+              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-yellow-600" />
             </button>
           </div>
           
@@ -1049,7 +1049,7 @@ export default function LandingPage() {
                 onClick={() => setCurrentTestimonial(index)}
                 className={`w-3 h-3 lg:w-4 lg:h-4 rounded-full transition-all duration-300 ${
                   index === currentTestimonial 
-                    ? 'bg-blue-600 w-8 lg:w-10' 
+                    ? 'bg-yellow-600 w-8 lg:w-10' 
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
@@ -1059,25 +1059,25 @@ export default function LandingPage() {
           {/* Trust Indicators */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mt-16 lg:mt-20 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-blue-600 mb-2 lg:mb-3">+500</div>
+              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-600 mb-2 lg:mb-3">+500</div>
               <div className="text-gray-600 text-sm lg:text-base">
                 {language === 'ar' ? 'عميل راضي' : language === 'en' ? 'Happy customers' : 'Clients satisfaits'}
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-green-600 mb-2 lg:mb-3">5★</div>
+              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-600 mb-2 lg:mb-3">5★</div>
               <div className="text-gray-600 text-sm lg:text-base">
                 {language === 'ar' ? 'متوسط التقييم' : language === 'en' ? 'Average rating' : 'Note moyenne'}
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-purple-600 mb-2 lg:mb-3">100%</div>
+              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-black mb-2 lg:mb-3">100%</div>
               <div className="text-gray-600 text-sm lg:text-base">
                 {language === 'ar' ? 'ضمان الجودة' : language === 'en' ? 'Quality guarantee' : 'Garantie qualité'}
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-orange-600 mb-2 lg:mb-3">24h</div>
+              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-amber-600 mb-2 lg:mb-3">24h</div>
               <div className="text-gray-600 text-sm lg:text-base">
                 {language === 'ar' ? 'استجابة سريعة' : language === 'en' ? 'Fast response' : 'Réponse rapide'}
               </div>
@@ -1102,10 +1102,10 @@ export default function LandingPage() {
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
               {t.faq.questions.map((faq, index) => (
-                <div key={index} className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+                <div key={index} className="bg-gradient-to-br from-yellow-50 to-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-start gap-4">
-                    <div className="bg-blue-100 rounded-full p-2 lg:p-3 flex-shrink-0 mt-1">
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-blue-600 rounded-full"></div>
+                    <div className="bg-yellow-100 rounded-full p-2 lg:p-3 flex-shrink-0 mt-1">
+                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-yellow-600 rounded-full"></div>
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-3 lg:mb-4 leading-tight">
@@ -1122,7 +1122,7 @@ export default function LandingPage() {
             
             {/* Quick Contact CTA */}
             <div className="text-center mt-12 lg:mt-16">
-              <div className="bg-gradient-to-r from-blue-50 to-green-50 rounded-2xl p-6 md:p-8 lg:p-12 max-w-4xl mx-auto">
+              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-6 md:p-8 lg:p-12 max-w-4xl mx-auto">
                 <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4 lg:mb-6">
                   {t.faq.hasQuestion}
                 </h3>
@@ -1151,8 +1151,8 @@ export default function LandingPage() {
           style={{ backgroundImage: 'url(/images/backgroundherodesktop.jpg)' }}
         ></div>
         
-        <div className="absolute inset-0 bg-black/40 lg:bg-black/50"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent"></div>
+        <div className="absolute inset-0 bg-black/60 lg:bg-black/70"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
         <div className="container mx-auto px-4 relative z-10">
           
           {/* Logo and Main CTA Combined */}
@@ -1160,39 +1160,39 @@ export default function LandingPage() {
             <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold mb-4 lg:mb-6">
               {t.finalCta.title}
             </h2>
-            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 lg:mb-12 text-blue-100">
-              {t.finalCta.subtitle.replace('Zero Glissage', '')} <span className="text-yellow-300 font-semibold">Zero Glissage</span>
+            <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 lg:mb-12 text-gray-100">
+              {t.finalCta.subtitle.replace('Zero Glissage', '')} <span className="text-yellow-400 font-semibold">Zero Glissage</span>
             </p>
             
             {/* Main CTA Button */}
             <div className="flex justify-center mb-8 lg:mb-12">
               <WhatsAppButton 
                 text={t.finalCta.cta} 
-                className="text-lg md:text-xl lg:text-2xl px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 bg-green-500 hover:bg-green-600 w-full sm:w-auto"
+                className="text-lg md:text-xl lg:text-2xl px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 bg-yellow-500 hover:bg-yellow-600 w-full sm:w-auto"
               />
             </div>
             
             {/* Compact Benefits Grid */}
             <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-4xl mx-auto">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 lg:p-6 xl:p-8 text-center">
-                <CheckCircle className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-green-400" />
+                <CheckCircle className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-yellow-400" />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg xl:text-xl mb-1 lg:mb-2">{t.finalCta.benefits.freeInspection.title}</h3>
-                <p className="text-blue-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.freeInspection.description}</p>
+                <p className="text-gray-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.freeInspection.description}</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 lg:p-6 xl:p-8 text-center">
                 <TestTube className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-yellow-400" />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg xl:text-xl mb-1 lg:mb-2">{t.finalCta.benefits.freeTrial.title}</h3>
-                <p className="text-blue-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.freeTrial.description}</p>
+                <p className="text-gray-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.freeTrial.description}</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 lg:p-6 xl:p-8 text-center">
-                <Shield className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-purple-400" />
+                <Shield className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-yellow-400" />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg xl:text-xl mb-1 lg:mb-2">{t.finalCta.benefits.guarantee.title}</h3>
-                <p className="text-blue-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.guarantee.description}</p>
+                <p className="text-gray-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.guarantee.description}</p>
               </div>
             </div>
             
             {/* Quick Contact Info */}
-            <div className="flex items-center justify-center gap-2 mt-6 lg:mt-8 text-sm md:text-base lg:text-lg text-blue-200">
+            <div className="flex items-center justify-center gap-2 mt-6 lg:mt-8 text-sm md:text-base lg:text-lg text-gray-200">
               <Phone className="w-4 h-4 lg:w-5 lg:h-5" />
               <span>{t.finalCta.contact}</span>
             </div>
