@@ -30,15 +30,9 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
   const [isDragging, setIsDragging] = useState(false)
   const [showInstructions, setShowInstructions] = useState(true)
   const [hasInteracted, setHasInteracted] = useState(false)
-  
-  // Enhanced touch tracking for better mobile interaction
-  const [touchStart, setTouchStart] = useState<{ x: number, y: number, time: number } | null>(null)
-  const [isHorizontalDrag, setIsHorizontalDrag] = useState(false)
-  const [touchMoved, setTouchMoved] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   
   const containerRef = useRef<HTMLDivElement>(null)
-
   const currentComparison = comparisons[currentIndex]
 
   // Detect mobile device
@@ -103,6 +97,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
 
   const instructionText = getInstructionText()
 
+  // Simplified position update function
   const updateSliderPosition = useCallback((clientX: number) => {
     if (!containerRef.current) return
 
@@ -118,100 +113,68 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
     }
   }, [showInstructions, hasInteracted])
 
+  // Simplified mouse handlers
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
+    e.stopPropagation()
     setIsDragging(true)
     updateSliderPosition(e.clientX)
   }, [updateSliderPosition])
 
-  const handleMouseMove = useCallback((e: MouseEvent) => {
+  // Simplified touch handlers
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    e.preventDefault()
+    e.stopPropagation()
+    setIsDragging(true)
+    const touch = e.touches[0]
+    updateSliderPosition(touch.clientX)
+  }, [updateSliderPosition])
+
+  // Universal move handler for both mouse and touch
+  const handleMove = useCallback((clientX: number) => {
     if (isDragging) {
-      updateSliderPosition(e.clientX)
+      updateSliderPosition(clientX)
     }
   }, [isDragging, updateSliderPosition])
 
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false)
-  }, [])
+  // Mouse move handler
+  const handleMouseMove = useCallback((e: MouseEvent) => {
+    handleMove(e.clientX)
+  }, [handleMove])
 
-  // Significantly improved touch handling with better mobile sensitivity
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    const touch = e.touches[0]
-    setTouchStart({ 
-      x: touch.clientX, 
-      y: touch.clientY, 
-      time: Date.now() 
-    })
-    setIsHorizontalDrag(false)
-    setTouchMoved(false)
-    
-    // Don't prevent default initially - let browser handle scroll detection
-  }, [])
-
+  // Touch move handler
   const handleTouchMove = useCallback((e: TouchEvent) => {
-    if (!touchStart) return
-
-    const touch = e.touches[0]
-    const deltaX = Math.abs(touch.clientX - touchStart.x)
-    const deltaY = Math.abs(touch.clientY - touchStart.y)
-    const totalMovement = deltaX + deltaY
-    
-    // Much more sensitive detection for mobile - reduced threshold
-    if (totalMovement < 3) return
-    
-    setTouchMoved(true)
-    
-    // More lenient horizontal detection for better mobile UX
-    if (!isDragging && !isHorizontalDrag && totalMovement > 8) {
-      const isHorizontal = deltaX > deltaY && deltaX > 10
-      const horizontalRatio = deltaX / (deltaY || 1)
-      
-      // More forgiving horizontal detection
-      if (isHorizontal && horizontalRatio > 1.2) {
-        // This is horizontal drag on the slider
-        setIsDragging(true)
-        setIsHorizontalDrag(true)
-        e.preventDefault()
-        updateSliderPosition(touch.clientX)
-      } else if (deltaY > deltaX && deltaY > 15) {
-        // Clear vertical scrolling - don't interfere
-        setTouchStart(null)
-        return
-      }
-    } else if (isDragging && isHorizontalDrag) {
-      // Continue horizontal dragging with smooth updates
+    if (isDragging) {
       e.preventDefault()
-      updateSliderPosition(touch.clientX)
+      const touch = e.touches[0]
+      handleMove(touch.clientX)
     }
-  }, [isDragging, isHorizontalDrag, touchStart, updateSliderPosition])
+  }, [isDragging, handleMove])
 
-  const handleTouchEnd = useCallback(() => {
+  // Universal end handler
+  const handleEnd = useCallback(() => {
     setIsDragging(false)
-    setIsHorizontalDrag(false)
-    setTouchStart(null)
-    setTouchMoved(false)
   }, [])
 
-  // Optimized event listener management
+  // Event listeners setup
   useEffect(() => {
     if (isDragging) {
+      // Mouse events
       document.addEventListener('mousemove', handleMouseMove, { passive: false })
-      document.addEventListener('mouseup', handleMouseUp, { passive: true })
+      document.addEventListener('mouseup', handleEnd, { passive: true })
       
-      // Enhanced touch move handling for mobile
-      if (isHorizontalDrag) {
-        document.addEventListener('touchmove', handleTouchMove, { passive: false })
-      }
-      document.addEventListener('touchend', handleTouchEnd, { passive: true })
+      // Touch events
+      document.addEventListener('touchmove', handleTouchMove, { passive: false })
+      document.addEventListener('touchend', handleEnd, { passive: true })
     }
 
     return () => {
       document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
+      document.removeEventListener('mouseup', handleEnd)
       document.removeEventListener('touchmove', handleTouchMove)
-      document.removeEventListener('touchend', handleTouchEnd)
+      document.removeEventListener('touchend', handleEnd)
     }
-  }, [isDragging, isHorizontalDrag, handleMouseMove, handleMouseUp, handleTouchMove, handleTouchEnd])
+  }, [isDragging, handleMouseMove, handleTouchMove, handleEnd])
 
   const nextComparison = () => {
     setCurrentIndex(prev => (prev + 1) % comparisons.length)
@@ -231,9 +194,8 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
         className="relative overflow-hidden rounded-2xl bg-gray-200 shadow-2xl group cursor-pointer select-none touch-slider"
         style={{ 
           aspectRatio: '16/10',
-          touchAction: isMobile ? 'pan-y pinch-zoom' : 'auto' // Dynamic touch action
+          touchAction: 'none' // Disable all default touch behaviors
         }}
-        onTouchStart={handleTouchStart}
       >
         {/* After Image (Background) */}
         <div className="absolute inset-0">
@@ -256,7 +218,6 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           className="absolute inset-0 transition-all duration-100 ease-out pointer-events-none"
           style={{
             clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
-            // Faster transitions for more responsive feel
             transition: isDragging ? 'none' : 'clip-path 0.1s ease-out'
           }}
         >
@@ -289,14 +250,14 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           </div>
         )}
 
-        {/* Enhanced Slider Line and Handle with better mobile sizing */}
+        {/* Enhanced Slider Line and Handle */}
         <div 
           className={`absolute top-0 bottom-0 bg-white shadow-2xl cursor-col-resize z-20 transition-all duration-200 pointer-events-none ${
             isMobile ? 'w-2' : 'w-1 group-hover:w-2'
           }`}
           style={{ left: `${sliderPosition}%`, transform: 'translateX(-50%)' }}
         >
-          {/* Enhanced Interactive Slider Handle with larger mobile touch target */}
+          {/* Interactive Slider Handle */}
           <div 
             className={`slider-handle absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 z-30 pointer-events-auto ${
               isMobile ? 'w-16 h-16 hover:scale-105' : 'w-14 h-14 hover:scale-110'
@@ -311,7 +272,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
             )}
           </div>
 
-          {/* Enhanced vertical indicators with better mobile visibility */}
+          {/* Vertical indicators */}
           <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 bg-white rounded-full shadow-lg pointer-events-none ${
             isMobile ? 'w-5 h-5' : 'w-4 h-4'
           }`}></div>
@@ -320,20 +281,15 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           }`}></div>
         </div>
 
-        {/* Enhanced interactive overlay with improved touch handling */}
+        {/* Interactive overlay - captures clicks anywhere on the image */}
         <div 
-          className="absolute inset-0 cursor-col-resize z-10 touch-slider"
-          style={{ 
-            touchAction: isMobile ? 'pan-y pinch-zoom' : 'auto',
-            // Add larger touch target area on mobile
-            padding: isMobile ? '10px' : '0',
-            margin: isMobile ? '-10px' : '0'
-          }}
+          className="absolute inset-0 cursor-col-resize z-10"
+          style={{ touchAction: 'none' }}
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
         />
 
-        {/* Enhanced progress indicator */}
+        {/* Progress indicator */}
         <div className="absolute bottom-0 left-0 right-0 h-2 bg-black/20 pointer-events-none">
           <div 
             className="h-full bg-gradient-to-r from-red-500 to-green-500 transition-all duration-100"
