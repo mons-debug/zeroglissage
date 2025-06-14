@@ -29,7 +29,7 @@ import { LanguageSwitcher } from '../components/ui/language-switcher'
 import { WhatsAppIcon } from '../components/ui/whatsapp-icon'
 import { Language } from './translations'
 
-const WHATSAPP_NUMBER = "212XXXXXXXXX"
+const WHATSAPP_NUMBER = "212642603520"
 
 const getWhatsAppMessage = (language: Language) => {
   switch (language) {
@@ -75,7 +75,7 @@ const WhatsAppButton = ({ text, className = "" }: { text: string, className?: st
   return (
     <button
       onClick={handleClick}
-      className={`bg-yellow-500 hover:bg-yellow-600 text-black font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 ${className}`}
+      className={`bg-logo-yellow-500 hover:bg-logo-yellow-600 text-black font-bold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 ${className}`}
       style={{ minHeight: '44px' }} // Ensure minimum touch target size
     >
       <WhatsAppIcon size={20} color="black" className="flex-shrink-0" />
@@ -104,7 +104,7 @@ const FloatingWhatsApp = () => {
         height: '60px',
         bottom: '40px',
         right: '40px',
-        backgroundColor: '#eab308', // Yellow-500
+        backgroundColor: '#ffeb3b', // Logo Yellow-500
         color: '#000',
         borderRadius: '50px',
         textAlign: 'center',
@@ -180,8 +180,8 @@ export default function LandingPage() {
             <p className="text-xl md:text-2xl lg:text-2xl xl:text-3xl mb-8 text-gray-100 font-medium max-w-4xl mx-auto animate-fade-in-up animation-delay-400">
               {t.hero.subtitle}
               <br />
-              <span className="text-yellow-400">
-                {language === 'ar' ? 'بدون تكسير • شفاف • آمن 100%' : 
+              <span className="text-logo-yellow-400">
+                {language === 'ar' ? 'بدون تكسير... بدون تغيير الارضية' : 
                  language === 'en' ? 'No Breaking • Transparent • 100% Safe' :
                  'Sans Casse • Transparent • 100% Sûr'}
               </span>
@@ -192,7 +192,7 @@ export default function LandingPage() {
                 text={t.hero.cta} 
                 className="text-lg lg:text-xl px-10 py-5 w-full sm:w-auto mx-auto animate-bounce-gentle"
               />
-              <div className="flex items-center text-yellow-300 font-semibold text-base lg:text-lg animate-pulse-gentle">
+              <div className="flex items-center text-logo-yellow-300 font-semibold text-base lg:text-lg animate-pulse-gentle">
                 <CheckCircle className="w-5 h-5 ml-2" />
                 {language === 'ar' ? 'فحص وتجربة مجانية في منزلك' :
                  language === 'en' ? 'Free inspection and trial at your home' :
@@ -202,7 +202,7 @@ export default function LandingPage() {
             
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6 text-center text-sm max-w-4xl mx-auto">
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-800">
-                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">+500</div>
+                <div className="text-2xl lg:text-3xl font-bold text-logo-yellow-400 animate-count-up">+500</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'منزل محمي' :
                    language === 'en' ? 'Protected Homes' :
@@ -210,7 +210,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1000">
-                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">100%</div>
+                <div className="text-2xl lg:text-3xl font-bold text-logo-yellow-400 animate-count-up">100%</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'ضمان الجودة' :
                    language === 'en' ? 'Quality Guarantee' :
@@ -218,7 +218,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1200">
-                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">24h</div>
+                <div className="text-2xl lg:text-3xl font-bold text-logo-yellow-400 animate-count-up">24h</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'خدمة سريعة' :
                    language === 'en' ? 'Fast Service' :
@@ -226,7 +226,7 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 lg:p-6 animate-fade-in-up animation-delay-1400">
-                <div className="text-2xl lg:text-3xl font-bold text-yellow-400 animate-count-up">5★</div>
+                <div className="text-2xl lg:text-3xl font-bold text-logo-yellow-400 animate-count-up">5★</div>
                 <div className="text-sm lg:text-base">
                   {language === 'ar' ? 'تقييم العملاء' :
                    language === 'en' ? 'Customer Rating' :
@@ -239,7 +239,7 @@ export default function LandingPage() {
       </section>
 
       {/* Problem Section - Glass Morphism Design */}
-      <section className="relative py-12 md:py-16 lg:py-24 bg-gradient-to-br from-yellow-50 via-yellow-25 to-amber-50 overflow-hidden">
+      <section className="relative py-12 md:py-16 lg:py-24 bg-gradient-to-br from-warm-gray-50 via-logo-yellow-50 to-warm-gray-100 overflow-hidden">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           {/* Mobile Layout - Full Width Image with Overlay (unchanged) */}
@@ -256,13 +256,13 @@ export default function LandingPage() {
               
               {/* Mobile: Centered Glass Overlay */}
               <div className="absolute inset-0 flex items-center justify-center p-6 md:p-12">
-                <div className="bg-black/20 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-yellow-500/30 relative overflow-hidden max-w-4xl w-full my-auto mt-[15vh]">
+                <div className="bg-black/20 backdrop-blur-md rounded-3xl p-8 md:p-12 shadow-2xl border border-logo-yellow-500/30 relative overflow-hidden max-w-4xl w-full my-auto mt-[15vh]">
                   {/* Subtle background pattern */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/10 via-transparent to-black/10 rounded-3xl"></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-logo-yellow-500/10 via-transparent to-black/10 rounded-3xl"></div>
                   
                   {/* Content */}
                   <div className="relative z-10 text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-yellow-500/90 backdrop-blur-sm rounded-full mb-4 shadow-xl">
+                    <div className="inline-flex items-center justify-center w-16 h-16 md:w-20 md:h-20 bg-logo-yellow-500/90 backdrop-blur-sm rounded-full mb-4 shadow-xl">
                       <img 
                         src="/gliisagelogo-06.png" 
                         alt="خطر الانزلاق" 
@@ -282,7 +282,7 @@ export default function LandingPage() {
                          language === 'en' ? 'Every year, thousands of people suffer serious accidents due to slipping in homes.' :
                          'Chaque année, des milliers de personnes subissent des accidents graves dus aux glissades à domicile.'}
                       </p>
-                      <div className="bg-yellow-600/95 backdrop-blur-sm rounded-2xl px-4 py-3 inline-block shadow-xl border border-yellow-400/70">
+                      <div className="bg-logo-yellow-600/95 backdrop-blur-sm rounded-2xl px-4 py-3 inline-block shadow-xl border border-logo-yellow-400/70">
                         <p className="text-lg md:text-xl font-bold text-white drop-shadow-lg">
                           {language === 'ar' ? 'لا تنتظر حتى يحدث الحادث!' :
                            language === 'en' ? 'Don\'t wait until an accident happens!' :
@@ -296,7 +296,7 @@ export default function LandingPage() {
               
               {/* Bottom Caption */}
               <div className="absolute bottom-8 left-6 right-6">
-                <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-yellow-500/30">
+                <div className="bg-black/60 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-logo-yellow-500/30">
                   <h3 className="text-base md:text-lg font-bold text-white mb-1 drop-shadow-lg">
                     {language === 'ar' ? 'هذا ما يحدث كل يوم في البيوت المغربية' :
                      language === 'en' ? 'This happens every day in Moroccan homes' :
@@ -312,7 +312,7 @@ export default function LandingPage() {
               
               {/* Floating Danger Badge */}
               <div className="absolute top-6 right-6">
-                <div className="bg-yellow-600/90 backdrop-blur-sm text-black px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-yellow-400/50 flex items-center gap-2">
+                <div className="bg-logo-yellow-600/90 backdrop-blur-sm text-black px-4 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-logo-yellow-400/50 flex items-center gap-2">
                   <img 
                     src="/gliisagelogo-06.png" 
                     alt="خطر الانزلاق" 
@@ -340,8 +340,8 @@ export default function LandingPage() {
                 {/* Small CTA Overlay on Image */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute bottom-6 left-6 right-6">
-                  <div className="bg-black/20 backdrop-blur-md rounded-2xl p-4 xl:p-6 border border-yellow-500/30 text-center">
-                    <div className="bg-yellow-500/90 rounded-full w-12 h-12 xl:w-16 xl:h-16 flex items-center justify-center mx-auto mb-3 shadow-xl">
+                  <div className="bg-black/20 backdrop-blur-md rounded-2xl p-4 xl:p-6 border border-logo-yellow-500/30 text-center">
+                    <div className="bg-logo-yellow-500/90 rounded-full w-12 h-12 xl:w-16 xl:h-16 flex items-center justify-center mx-auto mb-3 shadow-xl">
                       <img 
                         src="/gliisagelogo-06.png" 
                         alt="خطر الانزلاق" 
@@ -364,7 +364,7 @@ export default function LandingPage() {
                 
                 {/* Floating Badge */}
                 <div className="absolute top-4 right-4">
-                  <div className="bg-yellow-600/90 backdrop-blur-sm text-black px-3 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-yellow-400/50 flex items-center gap-2">
+                  <div className="bg-logo-yellow-600/90 backdrop-blur-sm text-black px-3 py-2 rounded-full text-sm font-bold animate-pulse shadow-lg border border-logo-yellow-400/50 flex items-center gap-2">
                     <img 
                       src="/gliisagelogo-06.png" 
                       alt="خطر الانزلاق" 
@@ -383,7 +383,7 @@ export default function LandingPage() {
               <div className="space-y-6 xl:space-y-8">
                 {/* Main Title */}
                 <div className="text-center lg:text-right">
-                  <div className="bg-yellow-500/90 backdrop-blur-sm rounded-full w-16 h-16 xl:w-20 xl:h-20 flex items-center justify-center shadow-xl mb-6 mx-auto lg:mx-0 lg:mr-auto">
+                  <div className="bg-logo-yellow-500/90 backdrop-blur-sm rounded-full w-16 h-16 xl:w-20 xl:h-20 flex items-center justify-center shadow-xl mb-6 mx-auto lg:mx-0 lg:mr-auto">
                     <img 
                       src="/gliisagelogo-06.png" 
                       alt="خطر الانزلاق" 
@@ -391,18 +391,18 @@ export default function LandingPage() {
                     />
                   </div>
                   
-                  <h2 className="text-4xl xl:text-5xl font-bold leading-tight text-gray-800 mb-4">
+                                      <h2 className="text-4xl xl:text-5xl font-bold leading-tight text-primary-800 mb-4">
                     {language === 'ar' ? 'خطر الانزلاق' :
                      language === 'en' ? 'Slip Hazard' :
                      'Risque de Glissade'}<br />
-                    <span className="text-yellow-600">
+                    <span className="text-logo-yellow-600">
                       {language === 'ar' ? 'يهدد سلامة عائلتك!' :
                        language === 'en' ? 'threatens your family\'s safety!' :
                        'menace la sécurité de votre famille!'}
                     </span>
                   </h2>
                   
-                  <p className="text-lg xl:text-xl text-gray-700 leading-relaxed mb-8">
+                  <p className="text-lg xl:text-xl text-primary-600 leading-relaxed mb-8">
                     {language === 'ar' ? 'كل سنة، آلاف الأشخاص يتعرضون لحوادث خطيرة بسبب الانزلاق في المنازل المغربية' :
                      language === 'en' ? 'Every year, thousands of people suffer serious accidents due to slipping in Moroccan homes' :
                      'Chaque année, des milliers de personnes subissent des accidents graves dus aux glissades dans les foyers marocains'}
@@ -411,13 +411,13 @@ export default function LandingPage() {
                 
                 {/* Main Danger Zones - Only 2 Most Important */}
                 <div className="bg-white rounded-2xl p-6 xl:p-8 shadow-lg border border-gray-100">
-                  <h3 className="text-2xl xl:text-3xl font-bold mb-6 text-yellow-600 text-center">
+                  <h3 className="text-2xl xl:text-3xl font-bold mb-6 text-logo-yellow-600 text-center">
                     ⚠️ {language === 'ar' ? 'المناطق الأكثر خطورة' :
                           language === 'en' ? 'Most Dangerous Areas' :
                           'Zones les Plus Dangereuses'}
                   </h3>
                   <div className="grid grid-cols-2 gap-6">
-                    <div className="bg-yellow-600 text-black rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div className="yellow-icon-bg text-black rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
                       <div className="text-4xl mb-3">🚿</div>
                       <div className="font-bold text-xl">{t.problem.cards.bathroom.title}</div>
                       <div className="text-black/80 text-sm mt-1">
@@ -426,7 +426,7 @@ export default function LandingPage() {
                          'Le plus dangereux'}
                       </div>
                     </div>
-                    <div className="bg-yellow-600 text-black rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
+                    <div className="yellow-icon-bg text-black rounded-xl p-6 text-center shadow-lg transform hover:scale-105 transition-transform">
                       <div className="text-4xl mb-3">🍳</div>
                       <div className="font-bold text-xl">{t.problem.cards.kitchen.title}</div>
                       <div className="text-black/80 text-sm mt-1">
@@ -439,7 +439,7 @@ export default function LandingPage() {
                 </div>
                 
                 {/* Solution CTA - Simplified */}
-                <div className="bg-gradient-to-r from-yellow-500 to-black text-white rounded-2xl p-6 xl:p-8 shadow-lg text-center">
+                <div className="bg-gradient-to-r from-logo-yellow-500 to-black text-white rounded-2xl p-6 xl:p-8 shadow-lg text-center">
                   <h3 className="text-2xl xl:text-3xl font-bold mb-6">
                     ✅ {language === 'ar' ? 'الحل مع Zero Glissage' :
                           language === 'en' ? 'The Solution with Zero Glissage' :
@@ -484,12 +484,12 @@ export default function LandingPage() {
         </div>
         
         {/* Background decorative elements */}
-        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-yellow-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-logo-yellow-200/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-10 w-60 h-60 lg:w-80 lg:h-80 bg-amber-200/20 rounded-full blur-3xl"></div>
       </section>
 
       {/* Enhanced Responsive Cards Grid */}
-      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-yellow-50 via-yellow-25 to-amber-50">
+      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-warm-gray-50 via-primary-50 to-warm-gray-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16 animate-fade-in-up">
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-800 mb-6">
@@ -503,11 +503,11 @@ export default function LandingPage() {
             <div className="md:hidden mobile-carousel-container">
               <div className="mobile-carousel-content">
                 {/* Kitchen Card */}
-                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-500 snap-start animate-slide-in-right animation-delay-200">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-logo-yellow-500 snap-start animate-slide-in-right animation-delay-200">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
-                        <ChefHat className="w-7 h-7 text-yellow-600" />
+                      <div className="bg-gradient-to-br from-logo-yellow-100 to-logo-yellow-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
+                        <ChefHat className="w-7 h-7 text-logo-yellow-800" />
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -516,8 +516,8 @@ export default function LandingPage() {
                         {t.problem.cards.kitchen.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                        <span className="text-yellow-500 text-sm font-semibold">{t.problem.cards.kitchen.danger}</span>
+                        <span className="w-2 h-2 bg-logo-yellow-500 rounded-full animate-pulse"></span>
+                        <span className="text-logo-yellow-500 text-sm font-semibold">{t.problem.cards.kitchen.danger}</span>
                       </div>
                     </div>
                   </div>
@@ -537,19 +537,19 @@ export default function LandingPage() {
                         {t.problem.cards.bathroom.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                        <span className="text-yellow-500 text-sm font-semibold">{t.problem.cards.bathroom.danger}</span>
+                        <span className="w-2 h-2 bg-logo-yellow-500 rounded-full animate-pulse"></span>
+                        <span className="text-logo-yellow-500 text-sm font-semibold">{t.problem.cards.bathroom.danger}</span>
                       </div>
                     </div>
                   </div>
                 </div>
                 
                 {/* Stairs Card */}
-                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-600 snap-start animate-slide-in-right animation-delay-600">
+                <div className="mobile-card group bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-logo-yellow-600 snap-start animate-slide-in-right animation-delay-600">
                   <div className="flex items-start gap-4">
                     <div className="flex-shrink-0">
-                      <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
-                        <TrendingUp className="w-7 h-7 text-yellow-600" />
+                      <div className="bg-gradient-to-br from-logo-yellow-100 to-logo-yellow-200 rounded-xl w-14 h-14 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 animate-bounce-gentle">
+                        <TrendingUp className="w-7 h-7 text-logo-yellow-800" />
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
@@ -558,8 +558,8 @@ export default function LandingPage() {
                         {t.problem.cards.stairs.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-yellow-600 rounded-full animate-pulse"></span>
-                        <span className="text-yellow-600 text-sm font-semibold">{t.problem.cards.stairs.danger}</span>
+                        <span className="w-2 h-2 bg-logo-yellow-600 rounded-full animate-pulse"></span>
+                        <span className="text-logo-yellow-600 text-sm font-semibold">{t.problem.cards.stairs.danger}</span>
                       </div>
                     </div>
                   </div>
@@ -579,8 +579,8 @@ export default function LandingPage() {
                         {t.problem.cards.pool.description}
                       </p>
                       <div className="flex items-center gap-2">
-                        <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                        <span className="text-yellow-500 text-sm font-semibold">{t.problem.cards.pool.danger}</span>
+                        <span className="w-2 h-2 bg-logo-yellow-500 rounded-full animate-pulse"></span>
+                        <span className="text-logo-yellow-500 text-sm font-semibold">{t.problem.cards.pool.danger}</span>
                       </div>
                     </div>
                   </div>
@@ -591,18 +591,18 @@ export default function LandingPage() {
             {/* Desktop Grid Layout */}
             <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {/* Kitchen Card */}
-              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-500 h-full">
+              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-logo-yellow-500 h-full">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
-                    <ChefHat className="w-8 h-8 lg:w-10 lg:h-10 text-yellow-600" />
+                  <div className="bg-gradient-to-br from-logo-yellow-100 to-logo-yellow-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
+                    <ChefHat className="w-8 h-8 lg:w-10 lg:h-10 text-logo-yellow-600" />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">{t.problem.cards.kitchen.title}</h3>
                   <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-4">
                     {t.problem.cards.kitchen.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                    <span className="text-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.kitchen.danger}</span>
+                    <span className="w-2 h-2 bg-logo-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-logo-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.kitchen.danger}</span>
                   </div>
                 </div>
               </div>
@@ -618,25 +618,25 @@ export default function LandingPage() {
                     {t.problem.cards.bathroom.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                    <span className="text-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.bathroom.danger}</span>
+                    <span className="w-2 h-2 bg-logo-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-logo-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.bathroom.danger}</span>
                   </div>
                 </div>
               </div>
               
               {/* Stairs Card */}
-              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-yellow-600 h-full">
+              <div className="group bg-white rounded-2xl p-6 lg:p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border-l-4 border-logo-yellow-600 h-full">
                 <div className="text-center">
-                  <div className="bg-gradient-to-br from-yellow-100 to-yellow-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
-                    <TrendingUp className="w-8 h-8 lg:w-10 lg:h-10 text-yellow-600" />
+                  <div className="bg-gradient-to-br from-logo-yellow-100 to-logo-yellow-200 rounded-xl w-16 h-16 lg:w-20 lg:h-20 flex items-center justify-center group-hover:scale-110 transition-transform duration-300 mx-auto mb-4">
+                    <TrendingUp className="w-8 h-8 lg:w-10 lg:h-10 text-logo-yellow-600" />
                   </div>
                   <h3 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">{t.problem.cards.stairs.title}</h3>
                   <p className="text-gray-600 text-sm lg:text-base leading-relaxed mb-4">
                     {t.problem.cards.stairs.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-yellow-600 rounded-full animate-pulse"></span>
-                    <span className="text-yellow-600 text-sm lg:text-base font-semibold">{t.problem.cards.stairs.danger}</span>
+                    <span className="w-2 h-2 bg-logo-yellow-600 rounded-full animate-pulse"></span>
+                    <span className="text-logo-yellow-600 text-sm lg:text-base font-semibold">{t.problem.cards.stairs.danger}</span>
                   </div>
                 </div>
               </div>
@@ -652,8 +652,8 @@ export default function LandingPage() {
                     {t.problem.cards.pool.description}
                   </p>
                   <div className="flex items-center justify-center gap-2">
-                    <span className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></span>
-                    <span className="text-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.pool.danger}</span>
+                    <span className="w-2 h-2 bg-logo-yellow-500 rounded-full animate-pulse"></span>
+                    <span className="text-logo-yellow-500 text-sm lg:text-base font-semibold">{t.problem.cards.pool.danger}</span>
                   </div>
                 </div>
               </div>
@@ -733,11 +733,11 @@ export default function LandingPage() {
       </section>
 
       {/* Enhanced Solution Features - Mobile Optimized */}
-      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-yellow-50 to-amber-50">
+      <section className="py-12 md:py-16 lg:py-24 bg-gradient-to-br from-warm-gray-50 to-primary-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12 lg:mb-16">
             <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-800 mb-4 lg:mb-6">
-              <span className="text-yellow-600">Zero Glissage</span> {t.solution.title.split(' ').slice(2).join(' ')}
+              <span className="text-logo-yellow-600">Zero Glissage</span> {t.solution.title.split(' ').slice(2).join(' ')}
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl text-gray-700 max-w-4xl mx-auto">
               {t.solution.subtitle}
@@ -754,7 +754,7 @@ export default function LandingPage() {
                     alt="منتج Zero Glissage المضاد للانزلاق" 
                     className="w-full h-60 md:h-72 lg:h-80 xl:h-96 object-cover"
                   />
-                  <div className="absolute top-4 left-4 bg-yellow-600 text-black px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
+                  <div className="absolute top-4 left-4 bg-logo-yellow-600 text-black px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
                     ✅ {t.solution.original}
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 lg:p-4">
@@ -764,8 +764,8 @@ export default function LandingPage() {
                 </div>
               </div>
               <div className="order-1 md:order-2 space-y-4 lg:space-y-6">
-                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl">
-                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-logo-yellow-50 to-logo-yellow-100 rounded-xl">
+                  <div className="w-10 h-10 lg:w-12 lg:h-12 bg-logo-yellow-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <Shield className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                   </div>
                   <div>
@@ -786,7 +786,7 @@ export default function LandingPage() {
                     <p className="text-gray-600 text-sm lg:text-base">{t.solution.certified}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-yellow-50 to-amber-100 rounded-xl">
+                <div className="flex items-start gap-4 p-4 lg:p-6 bg-gradient-to-r from-logo-yellow-50 to-amber-100 rounded-xl">
                   <div className="w-10 h-10 lg:w-12 lg:h-12 bg-amber-600 rounded-full flex items-center justify-center flex-shrink-0">
                     <CheckCircle className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
                   </div>
@@ -806,8 +806,8 @@ export default function LandingPage() {
           {/* Compact Feature Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             <div className="bg-white rounded-2xl p-4 lg:p-6 xl:p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="bg-yellow-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <Eye className="w-6 h-6 lg:w-8 lg:h-8 text-yellow-600" />
+              <div className="bg-logo-yellow-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                <Eye className="w-6 h-6 lg:w-8 lg:h-8 text-logo-yellow-600" />
               </div>
               <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-2 lg:mb-3">{t.solution.features.transparent.title}</h3>
               <p className="text-gray-600 text-sm lg:text-base">
@@ -836,8 +836,8 @@ export default function LandingPage() {
             </div>
             
             <div className="bg-white rounded-2xl p-4 lg:p-6 xl:p-8 shadow-lg text-center hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-              <div className="bg-yellow-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
-                <Shield className="w-6 h-6 lg:w-8 lg:h-8 text-yellow-600" />
+              <div className="bg-logo-yellow-100 rounded-full w-12 h-12 lg:w-16 lg:h-16 flex items-center justify-center mx-auto mb-3 lg:mb-4">
+                <Shield className="w-6 h-6 lg:w-8 lg:h-8 text-logo-yellow-600" />
               </div>
               <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-2 lg:mb-3">{t.solution.features.longLasting.title}</h3>
               <p className="text-gray-600 text-sm lg:text-base">
@@ -861,15 +861,15 @@ export default function LandingPage() {
           </div>
           
           {/* Combined Process & Visual */}
-          <div className="bg-gradient-to-br from-yellow-50 to-amber-50 rounded-3xl p-6 md:p-8 lg:p-12 mb-8 lg:mb-12">
+          <div className="bg-gradient-to-br from-logo-yellow-50 to-warm-gray-100 rounded-3xl p-6 md:p-8 lg:p-12 mb-8 lg:mb-12 card-shadow-lg">
             <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
               {/* Process Steps */}
               <div className="space-y-4 lg:space-y-6">
                 <div className="flex items-center gap-4 bg-white rounded-2xl p-4 lg:p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="bg-yellow-500 text-black rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">1</div>
+                  <div className="bg-logo-yellow-500 text-black rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">1</div>
                   <div className="flex items-center gap-3">
-                    <div className="bg-yellow-100 rounded-xl p-3 lg:p-4">
-                      <Search className="w-6 h-6 lg:w-7 lg:h-7 text-yellow-600" />
+                    <div className="bg-logo-yellow-100 rounded-xl p-3 lg:p-4">
+                      <Search className="w-6 h-6 lg:w-7 lg:h-7 text-logo-yellow-600" />
                     </div>
                     <div>
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800">{t.howItWorks.steps.inspection.title}</h3>
@@ -892,10 +892,10 @@ export default function LandingPage() {
                 </div>
                 
                 <div className="flex items-center gap-4 bg-white rounded-2xl p-4 lg:p-6 shadow-md hover:shadow-lg transition-shadow">
-                  <div className="bg-yellow-600 text-black rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">3</div>
+                  <div className="bg-logo-yellow-600 text-black rounded-full w-12 h-12 lg:w-14 lg:h-14 flex items-center justify-center text-lg lg:text-xl font-bold flex-shrink-0">3</div>
                   <div className="flex items-center gap-3">
-                    <div className="bg-yellow-100 rounded-xl p-3 lg:p-4">
-                      <Brush className="w-6 h-6 lg:w-7 lg:h-7 text-yellow-600" />
+                    <div className="bg-logo-yellow-100 rounded-xl p-3 lg:p-4">
+                      <Brush className="w-6 h-6 lg:w-7 lg:h-7 text-logo-yellow-600" />
                     </div>
                     <div>
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800">{t.howItWorks.steps.application.title}</h3>
@@ -926,14 +926,14 @@ export default function LandingPage() {
                     alt="عملية التنظيف العميق للأرضية بتقنية Zero Glissage" 
                     className="w-full h-64 md:h-80 lg:h-96 xl:h-[28rem] object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-600/20 to-black/20"></div>
-                  <div className="absolute top-4 left-4 bg-yellow-600 text-black px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
+                  <div className="absolute inset-0 bg-gradient-to-r from-logo-yellow-600/20 to-black/20"></div>
+                  <div className="absolute top-4 left-4 bg-logo-yellow-600 text-black px-3 py-1 lg:px-4 lg:py-2 rounded-full text-sm lg:text-base font-bold">
                     🧽 {language === 'ar' ? 'تنظيف مهني' : language === 'en' ? 'Professional Cleaning' : 'Nettoyage Professionnel'}
                   </div>
                   <div className="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm rounded-xl p-3 lg:p-4">
                     <div className="grid grid-cols-3 gap-2 text-center">
                       <div>
-                        <div className="text-xl lg:text-2xl font-bold text-yellow-600">1</div>
+                        <div className="text-xl lg:text-2xl font-bold text-logo-yellow-600">1</div>
                         <div className="text-xs lg:text-sm text-gray-700">
                           {language === 'ar' ? 'إزالة الأوساخ' : language === 'en' ? 'Remove dirt' : 'Enlever saleté'}
                         </div>
@@ -945,7 +945,7 @@ export default function LandingPage() {
                         </div>
                       </div>
                       <div>
-                        <div className="text-xl lg:text-2xl font-bold text-yellow-600">3</div>
+                        <div className="text-xl lg:text-2xl font-bold text-logo-yellow-600">3</div>
                         <div className="text-xs lg:text-sm text-gray-700">
                           {language === 'ar' ? 'تحضير السطح' : language === 'en' ? 'Prepare surface' : 'Préparer surface'}
                         </div>
@@ -978,9 +978,9 @@ export default function LandingPage() {
       </section>
 
       {/* Modern Testimonials Carousel */}
-      <section className="py-16 lg:py-24 xl:py-32 bg-gradient-to-br from-yellow-50 via-white to-amber-50 relative overflow-hidden">
+      <section className="py-16 lg:py-24 xl:py-32 bg-gradient-to-br from-warm-gray-50 via-white to-primary-50 relative overflow-hidden">
         {/* Background Decorative Elements */}
-        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-yellow-200/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 right-10 w-40 h-40 lg:w-60 lg:h-60 bg-logo-yellow-200/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-20 left-10 w-60 h-60 lg:w-80 lg:h-80 bg-amber-200/20 rounded-full blur-3xl"></div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -998,12 +998,12 @@ export default function LandingPage() {
             {/* Main Testimonial Card */}
             <div className="bg-white rounded-3xl p-8 md:p-12 lg:p-16 shadow-2xl border border-gray-100 relative overflow-hidden">
               {/* Quote Icon */}
-              <div className="absolute top-6 right-6 lg:top-8 lg:right-8 text-6xl lg:text-8xl text-yellow-100 font-serif">"</div>
+              <div className="absolute top-6 right-6 lg:top-8 lg:right-8 text-6xl lg:text-8xl text-logo-yellow-100 font-serif">"</div>
               
               {/* Stars Rating */}
               <div className="flex justify-center mb-6 lg:mb-8">
                 {[...Array(t.testimonials.customers[currentTestimonial].rating)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 lg:w-8 lg:h-8 text-yellow-400 fill-current mx-1" />
+                  <Star key={i} className="w-6 h-6 lg:w-8 lg:h-8 text-logo-yellow-400 fill-current mx-1" />
                 ))}
               </div>
               
@@ -1028,16 +1028,16 @@ export default function LandingPage() {
             {/* Navigation Buttons */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-yellow-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
+              className="absolute left-4 lg:left-6 top-1/2 -translate-y-1/2 bg-white hover:bg-logo-yellow-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
             >
-              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-yellow-600" />
+              <ChevronRight className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-logo-yellow-600" />
             </button>
             
             <button
               onClick={nextTestimonial}
-              className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-yellow-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
+              className="absolute right-4 lg:right-6 top-1/2 -translate-y-1/2 bg-white hover:bg-logo-yellow-50 rounded-full p-3 lg:p-4 shadow-lg border border-gray-200 transition-all duration-300 hover:scale-110 group"
             >
-              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-yellow-600" />
+              <ChevronLeft className="w-6 h-6 lg:w-8 lg:h-8 text-gray-600 group-hover:text-logo-yellow-600" />
             </button>
           </div>
           
@@ -1049,7 +1049,7 @@ export default function LandingPage() {
                 onClick={() => setCurrentTestimonial(index)}
                 className={`w-3 h-3 lg:w-4 lg:h-4 rounded-full transition-all duration-300 ${
                   index === currentTestimonial 
-                    ? 'bg-yellow-600 w-8 lg:w-10' 
+                    ? 'bg-logo-yellow-600 w-8 lg:w-10' 
                     : 'bg-gray-300 hover:bg-gray-400'
                 }`}
               />
@@ -1059,13 +1059,13 @@ export default function LandingPage() {
           {/* Trust Indicators */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8 mt-16 lg:mt-20 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-600 mb-2 lg:mb-3">+500</div>
+              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-logo-yellow-600 mb-2 lg:mb-3">+500</div>
               <div className="text-gray-600 text-sm lg:text-base">
                 {language === 'ar' ? 'عميل راضي' : language === 'en' ? 'Happy customers' : 'Clients satisfaits'}
               </div>
             </div>
             <div className="text-center">
-              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-yellow-600 mb-2 lg:mb-3">5★</div>
+              <div className="text-3xl lg:text-4xl xl:text-5xl font-bold text-logo-yellow-600 mb-2 lg:mb-3">5★</div>
               <div className="text-gray-600 text-sm lg:text-base">
                 {language === 'ar' ? 'متوسط التقييم' : language === 'en' ? 'Average rating' : 'Note moyenne'}
               </div>
@@ -1101,11 +1101,11 @@ export default function LandingPage() {
           {/* Compact FAQ Grid */}
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
-              {t.faq.questions.map((faq, index) => (
-                <div key={index} className="bg-gradient-to-br from-yellow-50 to-white rounded-2xl p-6 lg:p-8 shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300">
+                              {t.faq.questions.map((faq, index) => (
+                  <div key={index} className="bg-gradient-to-br from-warm-gray-50 to-white rounded-2xl p-6 lg:p-8 card-shadow border border-warm-gray-200 hover:shadow-xl transition-all duration-300">
                   <div className="flex items-start gap-4">
-                    <div className="bg-yellow-100 rounded-full p-2 lg:p-3 flex-shrink-0 mt-1">
-                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-yellow-600 rounded-full"></div>
+                    <div className="bg-logo-yellow-100 rounded-full p-2 lg:p-3 flex-shrink-0 mt-1">
+                      <div className="w-2 h-2 lg:w-3 lg:h-3 bg-logo-yellow-600 rounded-full"></div>
                     </div>
                     <div className="flex-1">
                       <h3 className="text-lg lg:text-xl xl:text-2xl font-bold text-gray-800 mb-3 lg:mb-4 leading-tight">
@@ -1120,9 +1120,9 @@ export default function LandingPage() {
               ))}
             </div>
             
-            {/* Quick Contact CTA */}
-            <div className="text-center mt-12 lg:mt-16">
-              <div className="bg-gradient-to-r from-yellow-50 to-amber-50 rounded-2xl p-6 md:p-8 lg:p-12 max-w-4xl mx-auto">
+                          {/* Quick Contact CTA */}
+              <div className="text-center mt-12 lg:mt-16">
+                <div className="bg-gradient-to-r from-logo-yellow-50 to-warm-gray-100 rounded-2xl p-6 md:p-8 lg:p-12 max-w-4xl mx-auto card-shadow-lg">
                 <h3 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-800 mb-4 lg:mb-6">
                   {t.faq.hasQuestion}
                 </h3>
@@ -1161,31 +1161,31 @@ export default function LandingPage() {
               {t.finalCta.title}
             </h2>
             <p className="text-lg md:text-xl lg:text-2xl xl:text-3xl mb-8 lg:mb-12 text-gray-100">
-              {t.finalCta.subtitle.replace('Zero Glissage', '')} <span className="text-yellow-400 font-semibold">Zero Glissage</span>
+              {t.finalCta.subtitle.replace('Zero Glissage', '')} <span className="text-logo-yellow-400 font-semibold">Zero Glissage</span>
             </p>
             
             {/* Main CTA Button */}
             <div className="flex justify-center mb-8 lg:mb-12">
               <WhatsAppButton 
                 text={t.finalCta.cta} 
-                className="text-lg md:text-xl lg:text-2xl px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 bg-yellow-500 hover:bg-yellow-600 w-full sm:w-auto"
+                className="text-lg md:text-xl lg:text-2xl px-8 md:px-12 lg:px-16 py-4 md:py-6 lg:py-8 bg-logo-yellow-500 hover:bg-logo-yellow-600 w-full sm:w-auto"
               />
             </div>
             
             {/* Compact Benefits Grid */}
             <div className="grid grid-cols-3 gap-4 md:gap-6 lg:gap-8 max-w-4xl mx-auto">
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 lg:p-6 xl:p-8 text-center">
-                <CheckCircle className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-yellow-400" />
+                <CheckCircle className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-logo-yellow-400" />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg xl:text-xl mb-1 lg:mb-2">{t.finalCta.benefits.freeInspection.title}</h3>
                 <p className="text-gray-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.freeInspection.description}</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 lg:p-6 xl:p-8 text-center">
-                <TestTube className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-yellow-400" />
+                <TestTube className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-logo-yellow-400" />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg xl:text-xl mb-1 lg:mb-2">{t.finalCta.benefits.freeTrial.title}</h3>
                 <p className="text-gray-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.freeTrial.description}</p>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-xl p-4 lg:p-6 xl:p-8 text-center">
-                <Shield className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-yellow-400" />
+                <Shield className="w-8 h-8 lg:w-10 lg:h-10 xl:w-12 xl:h-12 mx-auto mb-2 lg:mb-3 text-logo-yellow-400" />
                 <h3 className="font-bold text-sm md:text-base lg:text-lg xl:text-xl mb-1 lg:mb-2">{t.finalCta.benefits.guarantee.title}</h3>
                 <p className="text-gray-100 text-xs lg:text-sm xl:text-base">{t.finalCta.benefits.guarantee.description}</p>
               </div>

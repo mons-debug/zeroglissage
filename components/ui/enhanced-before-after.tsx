@@ -237,12 +237,12 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           <div className="absolute inset-0 bg-black/50 flex items-center justify-center z-30 animate-pulse pointer-events-none">
             <div className="text-center text-white p-6 bg-black/70 rounded-2xl backdrop-blur-sm max-w-md mx-4">
               <div className="hidden md:block">
-                <MousePointer className="w-12 h-12 mx-auto mb-4 text-yellow-400" />
+                <MousePointer className="w-12 h-12 mx-auto mb-4 text-logo-yellow-400" />
                 <p className="text-lg font-semibold mb-2">{instructionText.desktop.title}</p>
                 <p className="text-sm opacity-90">{instructionText.desktop.subtitle}</p>
               </div>
               <div className="md:hidden">
-                <Smartphone className="w-12 h-12 mx-auto mb-4 text-yellow-400" />
+                <Smartphone className="w-12 h-12 mx-auto mb-4 text-logo-yellow-400" />
                 <p className="text-lg font-semibold mb-2">{instructionText.mobile.title}</p>
                 <p className="text-sm opacity-90">{instructionText.mobile.subtitle}</p>
               </div>
@@ -268,7 +268,7 @@ export const EnhancedBeforeAfter: React.FC<EnhancedBeforeAfterProps> = ({
           >
             <Move className={`text-gray-700 ${isMobile ? 'w-7 h-7' : 'w-6 h-6'}`} />
             {!hasInteracted && (
-              <div className="absolute inset-0 rounded-full border-4 border-yellow-400 opacity-70 animate-ping"></div>
+              <div className="absolute inset-0 rounded-full border-4 border-logo-yellow-400 opacity-70 animate-ping"></div>
             )}
           </div>
 

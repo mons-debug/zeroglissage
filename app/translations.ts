@@ -167,7 +167,7 @@ export interface Translations {
 export const translations: Record<Language, Translations> = {
   ar: {
     hero: {
-      title: "لا تترك الصدفة تحكم سلامة عائلتك",
+      title: "لا تترك الصدفة تحكم على سلامة عائلتك",
       subtitle: "تقنية مبتكرة لحماية عائلتك من مخاطر الانزلاق",
       cta: "احصل على فحص مجاني"
     },
