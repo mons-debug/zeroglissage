@@ -45,7 +45,20 @@ const getWhatsAppMessage = (language: Language) => {
 }
 
 const trackWhatsAppClick = () => {
-  // Google Analytics Event
+  // GTM DataLayer Event (Primary tracking)
+  if (typeof window !== 'undefined' && (window as any).dataLayer) {
+    (window as any).dataLayer.push({
+      event: 'whatsapp_click',
+      event_category: 'engagement',
+      event_label: 'cta_button',
+      value: 1,
+      currency: 'MAD',
+      content_name: 'Zero Glissage WhatsApp Lead',
+      lead_type: 'whatsapp_contact'
+    })
+  }
+  
+  // Backup: Google Analytics Event
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'whatsapp_click', {
       event_category: 'engagement',
