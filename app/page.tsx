@@ -58,6 +58,15 @@ const trackWhatsAppClick = () => {
     })
   }
   
+  // Google Ads Conversion Tracking
+  if (typeof window !== 'undefined' && (window as any).gtag) {
+    (window as any).gtag('event', 'conversion', {
+      send_to: 'AW-17199502230/WhatsApp_Lead',  // You'll need to update this with the actual conversion label
+      value: 1.0,
+      currency: 'MAD'
+    })
+  }
+  
   // Backup: Google Analytics Event
   if (typeof window !== 'undefined' && (window as any).gtag) {
     (window as any).gtag('event', 'whatsapp_click', {
