@@ -29,7 +29,7 @@ import { LanguageSwitcher } from '../components/ui/language-switcher'
 import { WhatsAppIcon } from '../components/ui/whatsapp-icon'
 import { Language } from './translations'
 
-const WHATSAPP_NUMBER = "212642603520"
+const WHATSAPP_NUMBER = "0657985260"
 
 const getWhatsAppMessage = (language: Language) => {
   switch (language) {
