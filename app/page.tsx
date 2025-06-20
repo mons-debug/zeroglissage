@@ -44,35 +44,13 @@ const getWhatsAppMessage = (language: Language) => {
   }
 }
 
-const trackWhatsAppClick = () => {
-  // GTM DataLayer Event (Primary tracking)
-  if (typeof window !== 'undefined' && (window as any).dataLayer) {
-    (window as any).dataLayer.push({
-      event: 'whatsapp_click',
-      event_category: 'engagement',
-      event_label: 'cta_button',
-      value: 1,
-      currency: 'MAD',
-      content_name: 'Zero Glissage WhatsApp Lead',
-      lead_type: 'whatsapp_contact'
-    })
-  }
-  
-  // Google Ads Conversion Tracking
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', 'conversion', {
-      send_to: 'AW-17199502230/WhatsApp_Lead',  // You'll need to update this with the actual conversion label
-      value: 1.0,
-      currency: 'MAD'
-    })
-  }
-  
-  // Backup: Google Analytics Event
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', 'whatsapp_click', {
-      event_category: 'engagement',
-      event_label: 'cta_button'
-    })
+const trackWhatsAppClick = (whatsappUrl: string) => {
+  // Google Ads Conversion Tracking (Primary)
+  if (typeof window !== 'undefined' && (window as any).gtag_report_conversion) {
+    (window as any).gtag_report_conversion(whatsappUrl)
+  } else {
+    // Fallback: Open WhatsApp directly if conversion tracking fails
+    window.open(whatsappUrl, '_blank')
   }
   
   // Facebook Pixel Event
@@ -88,10 +66,9 @@ const WhatsAppButton = ({ text, className = "" }: { text: string, className?: st
   const { language } = useLanguage()
   
   const handleClick = () => {
-    trackWhatsAppClick()
     const message = encodeURIComponent(getWhatsAppMessage(language))
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`
-    window.open(whatsappUrl, '_blank')
+    trackWhatsAppClick(whatsappUrl)
   }
 
   return (
@@ -110,10 +87,9 @@ const FloatingWhatsApp = () => {
   const { language } = useLanguage()
   
   const handleClick = () => {
-    trackWhatsAppClick()
     const message = encodeURIComponent(getWhatsAppMessage(language))
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`
-    window.open(whatsappUrl, '_blank')
+    trackWhatsAppClick(whatsappUrl)
   }
 
   return (
